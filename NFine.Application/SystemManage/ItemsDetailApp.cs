@@ -33,6 +33,7 @@ namespace NFine.Application.SystemManage
         }
         public List<ItemsDetailEntity> GetItemList(string enCode)
         {
+           
             return service.GetItemList(enCode);
         }
         public ItemsDetailEntity GetForm(string keyValue)

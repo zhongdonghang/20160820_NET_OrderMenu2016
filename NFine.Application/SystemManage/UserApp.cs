@@ -16,6 +16,7 @@ namespace NFine.Application.SystemManage
     public class UserApp
     {
         private IUserRepository service = new UserRepository();
+
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
         public List<UserEntity> GetList(Pagination pagination, string keyword)

@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -109,6 +110,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\appapi.asmx.cs">
+      <DependentUpon>appapi.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="App_Start\01 Handler\HandlerAjaxOnlyAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerAuthorizeAttribute.cs" />
     <Compile Include="App_Start\01 Handler\HandlerErrorAttribute.cs" />
@@ -120,6 +125,8 @@
     <Compile Include="Areas\ExampleManage\Controllers\SendMessagesController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SignetController.cs" />
     <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\SYS_ORGController.cs" />
+    <Compile Include="Areas\MenuSys\MenuSysAreaRegistration.cs" />
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
     <Compile Include="Areas\ReportManage\ReportManageAreaRegistration.cs" />
@@ -146,10 +153,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Content Include="api\appapi.asmx" />
     <Content Include="Content\css\framework-font.css" />
     <Content Include="Content\css\framework-ui.css" />
     <Content Include="Content\css\framework-login.css" />
@@ -377,6 +389,7 @@
     <Content Include="Content\js\zsign\signet.gif" />
     <Content Include="Global.asax" />
     <Content Include="Index.htm" />
+    <Content Include="lib\Newtonsoft.Json.dll" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -385,6 +398,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
+    <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_LayoutIndex.cshtml" />
@@ -556,7 +570,10 @@
   <ItemGroup>
     <Content Include="Areas\ReportManage\Views\Web.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\MenuSys\Models\" />
+    <Folder Include="Areas\MenuSys\Views\Shared\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\ReportManage\Views\Highcharts\Sample1.cshtml" />
     <Content Include="Areas\ReportManage\Views\Highcharts\Sample10.cshtml" />
@@ -609,6 +626,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Web.config" />
+    <Content Include="Areas\MenuSys\Views\SYS_ORG\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
