@@ -45,6 +45,10 @@ namespace NFine.Application.SystemManage
             }
             else
             {
+                ///钟东航修改，增加门店编号，自己写程序获取自增，不用数据库自增
+                int OrgNo =  service.IQueryable().Max(x => x.OrgNo);
+                organizeEntity.OrgNo = OrgNo;
+
                 organizeEntity.Create();
                 service.Insert(organizeEntity);
             }

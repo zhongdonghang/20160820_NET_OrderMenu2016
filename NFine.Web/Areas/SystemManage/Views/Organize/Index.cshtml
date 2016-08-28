@@ -17,18 +17,24 @@
             colModel: [
                 { label: "主键", name: "F_Id", hidden: true, key: true },
                 { label: '名称', name: 'F_FullName', width: 200, align: 'left' },
-                { label: '编号', name: 'F_EnCode', width: 150, align: 'left' },
+                { label: '编号', name: 'OrgNo', width: 150, align: 'left' },
                 {
                     label: '分类', name: 'F_CategoryId', width: 80, align: 'left',
                     formatter: function (cellvalue) {
-                        if (cellvalue == "Group") {
-                            return "集团";
-                        } else if (cellvalue == "Company") {
-                            return "公司";
-                        } else if (cellvalue == "Department") {
-                            return "部门";
-                        } else if (cellvalue == "WorkGroup") {
-                            return "小组";
+                        if (cellvalue == "gaodangcanting") {
+                            return "高档餐厅";
+                        } else if (cellvalue == "dapaidang") {
+                            return "大排档";
+                        } else if (cellvalue == "xiaocanguan") {
+                            return "小餐馆";
+                        } else if (cellvalue == "xiuxianxiaochidian") {
+                            return "休闲小吃店";
+                        } else if (cellvalue == "qita") {
+                            return "其他";
+                        } else if (cellvalue == "yunyingfang") {
+                            return "运营方";
+                        } else {
+                            return "其他";
                         }
                     }
                 },
@@ -36,6 +42,9 @@
                     label: '创建时间', name: 'F_CreatorTime', width: 80, align: 'left',
                     formatter: "date", formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' }
                 },
+                 { label: '规模', name: 'MemberNum', width: 100, align: 'left' },
+                  { label: '台位数', name: 'SeatNum', width: 80, align: 'left' },
+                   { label: '门店类型', name: 'OrgCategory', width: 80, align: 'left' },
                 {
                     label: "有效", name: "F_EnabledMark", width: 60, align: "center",
                     formatter: function (cellvalue) {

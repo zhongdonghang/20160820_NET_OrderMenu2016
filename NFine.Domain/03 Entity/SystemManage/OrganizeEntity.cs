@@ -37,5 +37,26 @@ namespace NFine.Domain.Entity.SystemManage
         public string F_LastModifyUserId { get; set; }
         public DateTime? F_DeleteTime { get; set; }
         public string F_DeleteUserId { get; set; }
+
+        #region 钟东航2016-08-28 添加的字段
+        /// <summary>
+        /// 门店人数
+        /// </summary>
+        public string MemberNum { get; set; }
+        /// <summary>
+        /// 台位数
+        /// </summary>
+        public int SeatNum { get; set; }
+        /// <summary>
+        /// 门店形象图
+        /// </summary>
+        public int MasterImage { get; set; }
+
+        /// <summary>
+        /// 门店编号
+        /// </summary>
+        public int OrgNo { get; set; }
+        #endregion
+
     }
 }

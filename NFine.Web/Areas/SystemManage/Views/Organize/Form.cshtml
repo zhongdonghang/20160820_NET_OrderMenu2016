@@ -57,10 +57,12 @@
                     <td class="formValue">
                         <select id="F_CategoryId" name="F_Target" class="form-control required">
                             <option value="">==请选择==</option>
-                            <option value="Group">集团</option>
-                            <option value="Company">公司</option>
-                            <option value="Department">部门</option>
-                            <option value="WorkGroup">小组</option>
+                            <option value="gaodangcanting">高档餐厅</option>
+                            <option value="dapaidang">大排档</option>
+                            <option value="xiaocanguan">小餐馆</option>
+                            <option value="xiuxianxiaochidian">休闲小吃店</option>
+                            <option value="qita">其他</option>
+                            <option value="yunyingfang">运营方</option>
                         </select>
                     </td>
                 </tr>
@@ -106,6 +108,25 @@
                         <input id="F_Fax" name="F_MobilePhone" type="text" class="form-control" />
                     </td>
                 </tr>
+
+                <!--钟东航添加的字段-->
+                <tr>
+                    <th class="formTitle">规模</th>
+                    <td class="formValue">
+                        <select id="MemberNum" name="MemberNum" class="form-control required">
+                            <option value="">==请选择==</option>
+                            <option value="Group">10人以下</option>
+                            <option value="Company">10-30人</option>
+                            <option value="Department">30-50人</option>
+                            <option value="WorkGroup">50人以上</option>
+                        </select>
+                    </td>
+                    <th class="formTitle">台位数</th>
+                    <td class="formValue">
+                        <input id="SeatNum" name="SeatNum" type="text" class="form-control required digits" />
+                    </td>
+                </tr>
+
                 <tr>
                     <th class="formTitle">地址</th>
                     <td class="formValue" colspan="3">
