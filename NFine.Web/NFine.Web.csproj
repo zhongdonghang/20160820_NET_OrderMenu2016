@@ -125,7 +125,6 @@
     <Compile Include="Areas\ExampleManage\Controllers\SendMessagesController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SignetController.cs" />
     <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
-    <Compile Include="Areas\MenuSys\Controllers\SYS_ORGController.cs" />
     <Compile Include="Areas\MenuSys\MenuSysAreaRegistration.cs" />
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
@@ -571,6 +570,7 @@
     <Content Include="Areas\ReportManage\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\MenuSys\Controllers\" />
     <Folder Include="Areas\MenuSys\Models\" />
     <Folder Include="Areas\MenuSys\Views\Shared\" />
   </ItemGroup>

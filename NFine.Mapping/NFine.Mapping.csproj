@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MenuBizMapping\SYS_ORGMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManage\AreaMap.cs" />
     <Compile Include="SystemManage\ItemsDetailMap.cs" />
@@ -69,6 +68,9 @@
       <Project>{7dc886cd-b8a0-44e8-aadd-57fcb0cfecb8}</Project>
       <Name>NFine.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MenuBizMapping\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
