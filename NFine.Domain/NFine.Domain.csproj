@@ -45,6 +45,19 @@
     <Compile Include="01 Infrastructure\IEntity.cs" />
     <Compile Include="01 Infrastructure\IModificationAudited.cs" />
     <Compile Include="02 ViewModel\AppRegsiterResult.cs" />
+    <Compile Include="03 Entity\MenuBiz\QUICK_NOTESEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\RS_MEMBER_FILEEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\RS_ORG_FILEEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\RS_PRODUCT_FILEEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\SYS_FILESEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\T_MEMBERSEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\T_ORDEREntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\T_ORDER_CHECKOUTEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\T_ORDER_INFOEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\T_ORG_CATEGORYEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\T_PRODUCTEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\T_PRODUCT_CATEORYEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\T_SEATEntity.cs" />
     <Compile Include="03 Entity\SystemManage\AreaEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleButtonEntity.cs" />
     <Compile Include="03 Entity\SystemManage\ModuleEntity.cs" />
@@ -93,7 +106,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="03 Entity\MenuBiz\" />
     <Folder Include="04 IRepository\MenuBiz\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
