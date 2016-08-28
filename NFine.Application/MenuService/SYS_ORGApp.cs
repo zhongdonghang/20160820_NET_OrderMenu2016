@@ -15,30 +15,30 @@ namespace NFine.Application.MenuService
     {
         private ISYS_ORGRepository service = new SYS_ORGRepository();
 
-        public string GetOrgListForJson(string _pageIndex, string _pageSize,string _cname)
-        {
-            ReturnPageResult<SYS_ORGEntity> ret = new ReturnPageResult<SYS_ORGEntity>();
-            try
-            {
-                Pagination pagination = new Pagination();
-                pagination.rows = int.Parse( _pageSize);
-                pagination.page = int.Parse( _pageIndex);
-                pagination.sord = "asc";
-                pagination.sidx = "OID,FullName";
-                var expression = ExtLinq.True<SYS_ORGEntity>();
-                List<SYS_ORGEntity> list = service.FindList(expression, pagination);
-                ret.Msg = "查询成功";
-                ret.Data = list;
-                ret.ResultCode = "200";
-            }
-            catch (Exception ex)
-            {
-                ret.ResultCode = "-1";
-                ret.Msg = "异常:" + ex;
-            }
+        //public string GetOrgListForJson(string _pageIndex, string _pageSize,string _cname)
+        //{
+        //    ReturnPageResult<SYS_ORGEntity> ret = new ReturnPageResult<SYS_ORGEntity>();
+        //    try
+        //    {
+        //        Pagination pagination = new Pagination();
+        //        pagination.rows = int.Parse( _pageSize);
+        //        pagination.page = int.Parse( _pageIndex);
+        //        pagination.sord = "asc";
+        //        pagination.sidx = "OID,FullName";
+        //        var expression = ExtLinq.True<SYS_ORGEntity>();
+        //        List<SYS_ORGEntity> list = service.FindList(expression, pagination);
+        //        ret.Msg = "查询成功";
+        //        ret.Data = list;
+        //        ret.ResultCode = "200";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ret.ResultCode = "-1";
+        //        ret.Msg = "异常:" + ex;
+        //    }
 
-            return JsonConvert.SerializeObject(ret);
-        }
+        //    return JsonConvert.SerializeObject(ret);
+        //}
 
         public List<SYS_ORGEntity> GetList(Pagination pagination, string keyword)
         {

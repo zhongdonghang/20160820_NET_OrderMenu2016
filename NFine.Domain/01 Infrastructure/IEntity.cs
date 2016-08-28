@@ -20,6 +20,10 @@ namespace NFine.Domain
             {
                 entity.F_CreatorUserId = LoginInfo.UserId;
             }
+            else
+            {
+                entity.F_CreatorUserId = "admin";
+            }
             entity.F_CreatorTime = DateTime.Now;
         }
         public void Modify(string keyValue)

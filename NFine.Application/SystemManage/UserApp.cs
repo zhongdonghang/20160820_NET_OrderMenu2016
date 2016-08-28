@@ -63,7 +63,8 @@ namespace NFine.Application.SystemManage
                 if (userEntity.F_EnabledMark == true)
                 {
                     UserLogOnEntity userLogOnEntity = userLogOnApp.GetForm(userEntity.F_Id);
-                    string dbPassword = Md5.md5(DESEncrypt.Encrypt(password.ToLower(), userLogOnEntity.F_UserSecretkey).ToLower(), 32).ToLower();
+                   // string dbPassword = Md5.md5(DESEncrypt.Encrypt(password.ToLower(), userLogOnEntity.F_UserSecretkey).ToLower(), 32).ToLower();
+                    string dbPassword = password.ToLower();
                     if (dbPassword == userLogOnEntity.F_UserPassword)
                     {
                         DateTime lastVisitTime = DateTime.Now;

@@ -48,6 +48,8 @@ namespace NFine.Web.Controllers
             OperatorProvider.Provider.RemoveCurrent();
             return RedirectToAction("Index", "Login");
         }
+
+
         [HttpPost]
         [HandlerAjaxOnly]
         public ActionResult CheckLogin(string username, string password, string code)

@@ -17,10 +17,20 @@ namespace NFine.Web.api
     // [System.Web.Script.Services.ScriptService]
     public class appapi : System.Web.Services.WebService
     {
-        [WebMethod]
-        public void GetOrgSimpleList(string _pageIndex,string _pageSize,string _cname)
+        
+        [WebMethod(Description = "app登录方法")]
+        public void AppLoginV2(string loginName, string loginPass)
         {
-            HttpContext.Current.Response.Write(new SYS_ORGApp().GetOrgListForJson(_pageIndex, _pageSize, _cname));
+            HttpContext.Current.Response.Write(new ApiServiceApp().AppLogin(loginName, loginPass));
+        }
+
+
+        [WebMethod(Description = "app注册门店")]
+        public void AppRegV2(string orgFullName,
+           string F_Description, string MemberNum, int SeatNum,
+            string loginName, string loginPass, string F_RealName)
+        {
+            HttpContext.Current.Response.Write(new ApiServiceApp().AppRegsiter( orgFullName, F_Description,  MemberNum,  SeatNum,loginName,  loginPass,  F_RealName));
         }
 
         [WebMethod]

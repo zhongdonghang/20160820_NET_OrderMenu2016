@@ -38,5 +38,10 @@ namespace NFine.Domain.Entity.SystemManage
         public string F_LastModifyUserId { get; set; }
         public DateTime? F_DeleteTime { get; set; }
         public string F_DeleteUserId { get; set; }
+
+        #region 钟东航新增字段
+        //组织架构业务编号
+        public int OrgNo { get; set; }
+        #endregion
     }
 }
