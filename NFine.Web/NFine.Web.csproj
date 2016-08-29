@@ -643,6 +643,7 @@
     <Content Include="Areas\MenuSys\Views\DayReport\Index.cshtml" />
     <Content Include="Areas\MenuSys\Views\MonthReport\Index.cshtml" />
     <Content Include="Areas\MenuSys\Views\Order\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Category\Form.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

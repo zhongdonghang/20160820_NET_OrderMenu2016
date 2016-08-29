@@ -1,5 +1,6 @@
 ﻿using NFine.Application.MenuService;
 using NFine.Code;
+using NFine.Domain._03_Entity.MenuBiz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,24 @@ namespace NFine.Web.Areas.MenuSys.Controllers
                 records = pagination.records
             };
             return Content(data.ToJson());
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetFormJson(string keyValue)
+        {
+            var data = objCategoryApp.GetForm(keyValue);
+            return Content(data.ToJson());
+        }
+
+        [HttpPost]
+        [HandlerAjaxOnly]
+        [ValidateAntiForgeryToken]
+        public ActionResult SubmitForm(T_PRODUCT_CATEORYEntity objT_PRODUCT_CATEORYEntity,  string keyValue)
+        {
+            objT_PRODUCT_CATEORYEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
+            objCategoryApp.SubmitForm(objT_PRODUCT_CATEORYEntity, keyValue);
+            return Success("操作成功。");
         }
 
     }

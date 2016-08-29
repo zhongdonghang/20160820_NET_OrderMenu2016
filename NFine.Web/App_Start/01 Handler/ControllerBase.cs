@@ -16,6 +16,10 @@ namespace NFine.Web
         {
             return View();
         }
+
+        
+
+
         [HttpGet]
         [HandlerAuthorize]
         public virtual ActionResult Form()

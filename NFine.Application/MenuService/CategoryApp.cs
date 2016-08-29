@@ -12,7 +12,7 @@ namespace NFine.Application.MenuService
 {
     /// <summary>
     /// 商品类别业务服务类
-    /// </summary>
+    /// </summary> 
     public class CategoryApp
     {
         private IT_PRODUCT_CATEORYRepository service = new T_PRODUCT_CATEORYRepository();
@@ -33,6 +33,39 @@ namespace NFine.Application.MenuService
             }
             expression = expression.And(t => t.OrgID == OrgId);
             return service.FindList(expression, pagination);
+        }
+
+        public T_PRODUCT_CATEORYEntity GetForm(string keyValue)
+        {
+            return service.FindEntity(int.Parse(keyValue));
+        }
+
+        public void SubmitForm(T_PRODUCT_CATEORYEntity objT_PRODUCT_CATEORYEntity, string keyValue)
+        {
+            if (!string.IsNullOrEmpty(keyValue))//编辑
+            {
+                service.Update(objT_PRODUCT_CATEORYEntity);
+               // objT_PRODUCT_CATEORYEntity.Modify(keyValue);
+            }
+            else
+            {
+                int OID = service.IQueryable().Max(x => x.OID);
+                objT_PRODUCT_CATEORYEntity.OID = OID + 1;
+                objT_PRODUCT_CATEORYEntity.ParentID = 0;
+                objT_PRODUCT_CATEORYEntity.Code = "code";
+                objT_PRODUCT_CATEORYEntity.EName = "ename";
+                objT_PRODUCT_CATEORYEntity.ICONID = "0";
+                objT_PRODUCT_CATEORYEntity.AllowEdit = 0;
+                objT_PRODUCT_CATEORYEntity.DeletionStateCode = 0;
+                objT_PRODUCT_CATEORYEntity.Enabled = 0;
+                objT_PRODUCT_CATEORYEntity.Description = "暂无";
+                objT_PRODUCT_CATEORYEntity.CreateUserId = 0;
+                objT_PRODUCT_CATEORYEntity.CreateBy = OperatorProvider.Provider.GetCurrent().UserName;
+                objT_PRODUCT_CATEORYEntity.ModifiedBy = OperatorProvider.Provider.GetCurrent().UserName;
+                objT_PRODUCT_CATEORYEntity.CreateOn = DateTime.Now;
+                objT_PRODUCT_CATEORYEntity.ModifiedOn = DateTime.Now;
+                service.Insert(objT_PRODUCT_CATEORYEntity);
+            }
         }
     }
 }

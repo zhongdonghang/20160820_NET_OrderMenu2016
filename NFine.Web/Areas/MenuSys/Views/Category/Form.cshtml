@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        if (!!keyValue) {
+            $.ajax({
+                url: "/MenuSys/Category/GetFormJson",
+                data: { keyValue: keyValue },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $("#form1").formSerialize(data);
+                }
+            });
+        }
+    });
+    function initControl() {
+        $("#CName").bindSelect()
+        $("#SortCode").bindSelect()
+    }
+    function submitForm() {
+        if (!$('#form1').formValid()) {
+            return false;
+        }
+        $.submitForm({
+            url: "/MenuSys/Category/SubmitForm?keyValue=" + keyValue,
+            param: $("#form1").formSerialize(),
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+</script>
+<form id="form1">
+    <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#">类别信息</a></li>
+        </ul>
+        <div style="padding-top: 20px; margin-right: 30px;">
+            <table class="form">
+                <tr>
+                    <th class="formTitle">类别</th>
+                    <td class="formValue">
+                        <input id="CName" name="CName" type="text" class="form-control required" placeholder="请输入类别" />
+                    </td>
+                    <th class="formTitle">排序号</th>
+                    <td class="formValue">
+                        <input id="SortCode" name="SortCode" type="text" class="form-control required digits" placeholder="只能输入整数数字" />
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</form>

@@ -42,7 +42,7 @@ namespace NFine.Application.SystemManage
         public void SubmitForm(UserEntity userEntity, UserLogOnEntity userLogOnEntity, string keyValue)
         {
             if (!string.IsNullOrEmpty(keyValue))
-            {
+            { 
                 userEntity.Modify(keyValue);
             }
             else
