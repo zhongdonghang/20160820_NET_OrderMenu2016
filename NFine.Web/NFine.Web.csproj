@@ -125,6 +125,14 @@
     <Compile Include="Areas\ExampleManage\Controllers\SendMessagesController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SignetController.cs" />
     <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\CashierController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\DayReportController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\MemBerController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\MonthReportController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\OrderController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\ProductController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\SeatController.cs" />
     <Compile Include="Areas\MenuSys\MenuSysAreaRegistration.cs" />
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
     <Compile Include="Areas\ReportManage\Controllers\HighchartsController.cs" />
@@ -570,7 +578,6 @@
     <Content Include="Areas\ReportManage\Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\MenuSys\Controllers\" />
     <Folder Include="Areas\MenuSys\Models\" />
     <Folder Include="Areas\MenuSys\Views\Shared\" />
   </ItemGroup>
@@ -628,6 +635,14 @@
     <Content Include="Areas\SystemManage\Views\User\Info.cshtml" />
     <Content Include="Areas\MenuSys\Views\Web.config" />
     <Content Include="Areas\MenuSys\Views\SYS_ORG\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Category\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\MemBer\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Product\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Seat\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Cashier\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\DayReport\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\MonthReport\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Order\Index.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
