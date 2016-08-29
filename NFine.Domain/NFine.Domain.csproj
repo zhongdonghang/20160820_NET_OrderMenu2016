@@ -68,6 +68,19 @@
     <Compile Include="03 Entity\SystemSecurity\FilterIPEntity.cs" />
     <Compile Include="03 Entity\SystemSecurity\LogEntity.cs" />
     <Compile Include="02 ViewModel\AuthorizeActionModel.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IQUICK_NOTESRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IRS_MEMBER_FILERepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IRS_ORG_FILERepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IRS_PRODUCT_FILERepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\ISYS_FILESRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IT_MEMBERSRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IT_ORDERRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IT_ORDER_CHECKOUTRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IT_ORDER_INFORepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IT_ORG_CATEGORYRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IT_PRODUCTRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IT_PRODUCT_CATEORYRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IT_SEATRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IAreaRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IItemsDetailRepository.cs" />
     <Compile Include="04 IRepository\SystemManage\IItemsRepository.cs" />
@@ -105,9 +118,7 @@
       <Name>NFine.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="04 IRepository\MenuBiz\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

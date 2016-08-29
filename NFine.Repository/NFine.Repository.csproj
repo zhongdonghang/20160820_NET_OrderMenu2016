@@ -39,6 +39,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MenuBiz\QUICK_NOTESRepository.cs" />
+    <Compile Include="MenuBiz\RS_MEMBER_FILERepository.cs" />
+    <Compile Include="MenuBiz\RS_ORG_FILERepository.cs" />
+    <Compile Include="MenuBiz\RS_PRODUCT_FILERepository.cs" />
+    <Compile Include="MenuBiz\SYS_FILESRepository.cs" />
+    <Compile Include="MenuBiz\T_MEMBERSRepository.cs" />
+    <Compile Include="MenuBiz\T_ORDERRepository.cs" />
+    <Compile Include="MenuBiz\T_ORDER_CHECKOUTRepository.cs" />
+    <Compile Include="MenuBiz\T_ORDER_INFORepository.cs" />
+    <Compile Include="MenuBiz\T_ORG_CATEGORYRepository.cs" />
+    <Compile Include="MenuBiz\T_PRODUCTRepository.cs" />
+    <Compile Include="MenuBiz\T_PRODUCT_CATEORYRepository.cs" />
+    <Compile Include="MenuBiz\T_SEATRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManage\ItemsDetailRepository.cs" />
     <Compile Include="SystemManage\ItemsRepository.cs" />
@@ -68,9 +81,7 @@
       <Name>NFine.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MenuBiz\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
