@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="01 Infrastructure\DbLogType.cs" />
     <Compile Include="MenuService\ApiServiceApp.cs" />
+    <Compile Include="MenuService\CategoryApp.cs" />
     <Compile Include="PageObject.cs" />
     <Compile Include="ResultObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

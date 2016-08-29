@@ -69,6 +69,7 @@ namespace NFine.Web.Controllers
                 {
                     OperatorModel operatorModel = new OperatorModel();
                     operatorModel.UserId = userEntity.F_Id;
+                    operatorModel.OrgId = userEntity.OrgNo;
                     operatorModel.UserCode = userEntity.F_Account;
                     operatorModel.UserName = userEntity.F_RealName;
                     operatorModel.CompanyId = userEntity.F_OrganizeId;

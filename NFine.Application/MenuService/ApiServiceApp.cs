@@ -163,7 +163,7 @@ namespace NFine.Application.MenuService
 
                         UserLogOnEntity addUserLog = new UserLogOnEntity();
                         addUserLog.F_UserPassword = loginPass;
-                        userDllService.SubmitForm(addUser, addUserLog, "");
+                        userDllService.SubmitForm(addUser, addUserLog, ""); 
 
                         AppRegsiterResult vm = new AppRegsiterResult();
                         vm.CurrentOrganizeEntity = addOrg;

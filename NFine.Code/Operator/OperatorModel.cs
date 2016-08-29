@@ -22,5 +22,9 @@ namespace NFine.Code
         public string LoginToken { get; set; }
         public DateTime LoginTime { get; set; }
         public bool IsSystem { get; set; }
+
+        #region 钟东航添加 组织机构ID
+        public int OrgId { get; set; } 
+        #endregion
     }
 }
