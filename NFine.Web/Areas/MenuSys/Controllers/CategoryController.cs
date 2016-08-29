@@ -46,11 +46,21 @@ namespace NFine.Web.Areas.MenuSys.Controllers
         }
 
         [HttpPost]
+        [HandlerAuthorize]
+        [HandlerAjaxOnly]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteForm(string keyValue)
+        {
+            objCategoryApp.DeleteForm(keyValue);
+            return Success("删除成功。");
+        }
+
+        [HttpPost]
         [HandlerAjaxOnly]
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(T_PRODUCT_CATEORYEntity objT_PRODUCT_CATEORYEntity,  string keyValue)
         {
-            objT_PRODUCT_CATEORYEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
+         //   objT_PRODUCT_CATEORYEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
             objCategoryApp.SubmitForm(objT_PRODUCT_CATEORYEntity, keyValue);
             return Success("操作成功。");
         }

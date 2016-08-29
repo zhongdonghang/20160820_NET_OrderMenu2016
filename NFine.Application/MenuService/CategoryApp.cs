@@ -40,12 +40,20 @@ namespace NFine.Application.MenuService
             return service.FindEntity(int.Parse(keyValue));
         }
 
+        public void DeleteForm(string keyValue)
+        {
+          int deleteOID =  int.Parse(keyValue);
+            service.Delete(t => t.OID == deleteOID);
+        }
+
         public void SubmitForm(T_PRODUCT_CATEORYEntity objT_PRODUCT_CATEORYEntity, string keyValue)
         {
             if (!string.IsNullOrEmpty(keyValue))//编辑
             {
-                service.Update(objT_PRODUCT_CATEORYEntity);
-               // objT_PRODUCT_CATEORYEntity.Modify(keyValue);
+                T_PRODUCT_CATEORYEntity oldT_PRODUCT_CATEORYEntity = service.FindEntity(int.Parse(keyValue));
+                oldT_PRODUCT_CATEORYEntity.CName = objT_PRODUCT_CATEORYEntity.CName;
+                oldT_PRODUCT_CATEORYEntity.SortCode = objT_PRODUCT_CATEORYEntity.SortCode;
+                service.Update(oldT_PRODUCT_CATEORYEntity);
             }
             else
             {
