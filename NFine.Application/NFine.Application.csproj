@@ -48,6 +48,7 @@
     <Compile Include="MenuService\CategoryApp.cs" />
     <Compile Include="MenuService\MembersApp.cs" />
     <Compile Include="MenuService\ProductApp.cs" />
+    <Compile Include="MenuService\SeatApp.cs" />
     <Compile Include="PageObject.cs" />
     <Compile Include="ResultObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
