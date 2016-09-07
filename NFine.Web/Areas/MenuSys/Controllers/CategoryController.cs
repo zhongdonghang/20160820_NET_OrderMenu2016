@@ -24,6 +24,12 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 获取类别列表显示在首页
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetGridJson(Pagination pagination, string keyword)
@@ -38,6 +44,12 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             return Content(data.ToJson());
         }
 
+        /// <summary>
+        /// 获取类别列表用于绑定到下拉框
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="keyword"></param>
+        /// <returns></returns>
         [HttpGet]
         [HandlerAjaxOnly]
         public ActionResult GetAllGridJson(Pagination pagination, string keyword)
@@ -49,8 +61,7 @@ namespace NFine.Web.Areas.MenuSys.Controllers
                 page = pagination.page,
                 records = pagination.records
             };
-          //  return Content(data.ToJson());
-          //  var data = itemsDetailApp.GetItemList(enCode);
+
             List<object> list = new List<object>();
             foreach (var item in data.rows)
             {
@@ -82,7 +93,7 @@ namespace NFine.Web.Areas.MenuSys.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SubmitForm(T_PRODUCT_CATEORYEntity objT_PRODUCT_CATEORYEntity,  string keyValue)
         {
-         //   objT_PRODUCT_CATEORYEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
+           objT_PRODUCT_CATEORYEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
             objCategoryApp.SubmitForm(objT_PRODUCT_CATEORYEntity, keyValue);
             return Success("操作成功。");
         }
