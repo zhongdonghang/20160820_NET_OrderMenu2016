@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script>
+    var keyValue = $.request("keyValue");
+    $(function () {
+        initControl();
+        $.ajax({
+            url: "/MenuSys/Product/GetFormJson",
+            data: { keyValue: keyValue },
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                $("#form1").formSerialize(data);
+                $("#form1").find('.form-control,select,input').attr('readonly', 'readonly');
+                $("#form1").find('div.ckbox label').attr('for', '');
+            }
+        });
+    })
+    function initControl() {
+
+        $("#PCategory").bindSelect({
+            url: "/MenuSys/Category/GetAllGridJson"
+        });
+
+    }
+</script>
+<form id="form1">
+    <div class="widget-body">
+        <div id="wizard" class="wizard" data-target="#wizard-steps" style="border-left: none; border-top: none; border-right: none;">
+            <ul class="steps">
+                <li data-target="#step-1" class="active"><span class="step">1</span>菜品信息<span class="chevron"></span></li>
+            </ul>
+        </div>
+        <div class="step-content" id="wizard-steps" style="border-left: none; border-bottom: none; border-right: none;">
+            <div class="step-pane active" id="step-1" style="padding-left: 5px; padding-top: 20px; margin-right: 20px;">
+                <table class="form">
+                    <tr>
+                        <th class="formTitle">品名</th>
+                        <td class="formValue">
+                            <input id="CName" name="CName" type="text" class="form-control required" placeholder="请输入品名" />
+                        </td>
+                        <th class="formTitle">类别</th>
+                        <td class="formValue">
+                            <select id="PCategory" name="PCategory" class="form-control required">
+                                <option value="">==请选择==</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">实价</th>
+                        <td class="formValue">
+                            <input id="Price1" name="Price1" type="text" class="form-control required" placeholder="请输入实价" />
+                        </td>
+                        <th class="formTitle">原价</th>
+                        <td class="formValue">
+                            <input id="Price2" name="Price2" type="text" class="form-control required" placeholder="请输入原价" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">排序号</th>
+                        <td class="formValue" colspan="3">
+                            <input id="SortCode" name="SortCode" type="text" class="form-control required digits" placeholder="请输入排序号" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">描述</th>
+                        <td class="formValue" colspan="3">
+                            <textarea id="PContent" name="PContent" class="form-control" style="height: 60px;"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="step-pane" id="step-2">
+                <div id="permissionTree"></div>
+            </div>
+        </div>
+        
+    </div>
+</form>

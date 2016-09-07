@@ -35,6 +35,30 @@ namespace NFine.Application.MenuService
             return service.FindList(expression, pagination);
         }
 
+        /// <summary>
+        /// 查询出所有类别列表
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="keyword"></param>
+        /// <param name="OrgId"></param>
+        /// <returns></returns>
+        public List<T_PRODUCT_CATEORYEntity> GetList(string keyword, int OrgId)
+        {
+            var expression = ExtLinq.True<T_PRODUCT_CATEORYEntity>();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.CName.Contains(keyword));
+            }
+            expression = expression.And(t => t.OrgID == OrgId);
+            Pagination pagination = new Pagination();
+            pagination.sidx = "SortCode desc";
+            pagination.sord = "asc";
+            pagination.rows = 100;
+            pagination.page = 1;
+
+            return service.FindList(expression, pagination);
+        }
+
         public T_PRODUCT_CATEORYEntity GetForm(string keyValue)
         {
             return service.FindEntity(int.Parse(keyValue));

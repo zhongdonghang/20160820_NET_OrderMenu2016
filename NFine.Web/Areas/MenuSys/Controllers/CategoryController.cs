@@ -1,6 +1,7 @@
 ﻿using NFine.Application.MenuService;
 using NFine.Code;
 using NFine.Domain._03_Entity.MenuBiz;
+using NFine.Domain.Entity.SystemManage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,27 @@ namespace NFine.Web.Areas.MenuSys.Controllers
                 records = pagination.records
             };
             return Content(data.ToJson());
+        }
+
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetAllGridJson(Pagination pagination, string keyword)
+        {
+            var data = new
+            {
+                rows = objCategoryApp.GetList(keyword, OperatorProvider.Provider.GetCurrent().OrgId),
+                total = pagination.total,
+                page = pagination.page,
+                records = pagination.records
+            };
+          //  return Content(data.ToJson());
+          //  var data = itemsDetailApp.GetItemList(enCode);
+            List<object> list = new List<object>();
+            foreach (var item in data.rows)
+            {
+                list.Add(new { id = item.OID, text = item.CName });
+            }
+            return Content(list.ToJson());
         }
 
         [HttpGet]
