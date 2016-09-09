@@ -13,6 +13,7 @@
             async: false,
             success: function (data) {
                 $("#form1").formSerialize(data);
+                $("#filePath").attr('src', "/uploadFiles/" + data.filePath);
                 $("#form1").find('.form-control,select,input').attr('readonly', 'readonly');
                 $("#form1").find('div.ckbox label').attr('for', '');
             }
@@ -68,6 +69,12 @@
                         <th class="formTitle">描述</th>
                         <td class="formValue" colspan="3">
                             <textarea id="PContent" name="PContent" class="form-control" style="height: 60px;"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">图片</th>
+                        <td class="formValue" colspan="3">
+                            <img id="filePath" name="filePath" width="150" height="150" />
                         </td>
                     </tr>
                 </table>

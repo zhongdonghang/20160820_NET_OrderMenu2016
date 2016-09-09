@@ -2,6 +2,7 @@
     ViewBag.Title = "Form";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
+
 <script>
     var keyValue = $.request("keyValue");
     $(function () {
@@ -13,6 +14,8 @@
                 dataType: "json",
                 async: false,
                 success: function (data) {
+                    // alert(data.filePath);
+                    $("#filePath").attr('src', "/uploadFiles/"+data.filePath);
                     $("#form1").formSerialize(data);
                 }
             });
@@ -28,6 +31,7 @@
             return false;
         }
         $.submitForm({
+
             url: "/MenuSys/Product/SubmitForm?keyValue=" + keyValue,
             param: $("#form1").formSerialize(),
             success: function () {
@@ -36,6 +40,10 @@
         })
     }
 </script>
+
+
+
+
 <form id="form1">
     <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
         <ul class="nav nav-tabs">
@@ -75,6 +83,14 @@
                     <th class="formTitle">描述</th>
                     <td class="formValue" colspan="3">
                         <textarea id="PContent" name="PContent" class="form-control" style="height: 60px;"></textarea>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <th class="formTitle">图片</th>
+                    <td class="formValue" colspan="3">
+                      <img id="filePath" name ="filePath" width="150" height="150"  />
                     </td>
                 </tr>
             </table>

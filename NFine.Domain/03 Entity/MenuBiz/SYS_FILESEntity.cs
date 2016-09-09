@@ -11,7 +11,7 @@ namespace NFine.Domain._03_Entity.MenuBiz
         public int OID { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
-        public string FileSize { get; set; }
+        public decimal FileSize { get; set; }
         public string ImageUrl { get; set; }
         public int ReadCount { get; set; }
         public int OrgID { get; set; }

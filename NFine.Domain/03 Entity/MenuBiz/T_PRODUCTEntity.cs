@@ -28,5 +28,7 @@ namespace NFine.Domain._03_Entity.MenuBiz
         public DateTime ModifiedOn { get; set; }
         public int ModifiedUserId { get; set; }
         public string ModifiedBy { get; set; }
+
+     //   public string filePath { get; set; }
     }
 }

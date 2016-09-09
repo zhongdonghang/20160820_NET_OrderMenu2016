@@ -24,6 +24,48 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             return View();
         }
 
+        public ActionResult UploadImage(string keyValue)
+        {
+            return View("SettingImageForm");
+        }
+
+
+        public ActionResult UploadProgressImage(HttpPostedFileBase file)
+        {
+            string productOID = Request.Params["txtOID"].ToString();
+            if (string.IsNullOrEmpty(productOID))
+            {
+                return Error("缺失的商品编号，请重新打开上传");
+            }
+            else if (file == null)
+            {
+                return Error("请选择一张商品图片");
+            }
+            else if (file.ContentType != "image/jpeg" && file.ContentType != "image/png")
+            {
+                return Error("只能上传jpg或者png格式的图片");
+            }
+            else
+            {
+                SYS_FILESEntity fileEntity = new SYS_FILESEntity();
+                string name = Common.CreateNo();
+                fileEntity.FileSize = file.ContentLength;
+                if (file.ContentType == "image/jpeg")
+                {
+                    fileEntity.FileName = name + ".jpg";
+                    fileEntity.FilePath = "/uploadFiles/" + fileEntity.FileName + ".jpg";
+                }
+                else
+                {
+                    fileEntity.FileName = name + ".png";
+                    fileEntity.FilePath = "/uploadFiles/" + fileEntity.FileName + ".png";
+                }
+                file.SaveAs(Server.MapPath("~/uploadFiles/"+ fileEntity.FileName));
+                objProductApp.SettingImageForProduct(fileEntity, productOID);
+            }
+            return Success("上传成功");
+        }
+
         [HttpPost]
         [HandlerAuthorize]
         [HandlerAjaxOnly]

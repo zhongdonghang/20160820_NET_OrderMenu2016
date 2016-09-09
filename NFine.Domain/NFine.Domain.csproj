@@ -45,6 +45,7 @@
     <Compile Include="01 Infrastructure\IEntity.cs" />
     <Compile Include="01 Infrastructure\IModificationAudited.cs" />
     <Compile Include="02 ViewModel\AppRegsiterResult.cs" />
+    <Compile Include="02 ViewModel\FullProductViewModel.cs" />
     <Compile Include="03 Entity\MenuBiz\QUICK_NOTESEntity.cs" />
     <Compile Include="03 Entity\MenuBiz\RS_MEMBER_FILEEntity.cs" />
     <Compile Include="03 Entity\MenuBiz\RS_ORG_FILEEntity.cs" />
