@@ -64,6 +64,8 @@ namespace NFine.Application.MenuService
             return service.FindList(expression, pagination);
         }
 
+
+
         /// <summary>
         /// 根据主键查询订单的主信息（单条），明细信息（多条），支付信息（单条）
         /// </summary>
@@ -79,6 +81,14 @@ namespace NFine.Application.MenuService
             order.OrderDetails = detailList;
             order.CheckOutInfo = checkOutInfo;
             return order;
+        }
+
+        public void DeleteForm(string keyValue)
+        {
+            T_ORDEREntity order = service.FindEntity(int.Parse(keyValue));
+            order.OrderState = -1;
+            order.ModifiedOn = DateTime.Now;
+            service.Update(order);
         }
 
     }

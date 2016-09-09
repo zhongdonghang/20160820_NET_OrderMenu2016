@@ -66,5 +66,15 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             };
             return Content(data.ToJson());
         }
+
+        [HttpPost]
+        [HandlerAuthorize]
+        [HandlerAjaxOnly]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteForm(string keyValue)
+        {
+            objOrderApp.DeleteForm(keyValue);
+            return Success("作废成功。");
+        }
     }
 }
