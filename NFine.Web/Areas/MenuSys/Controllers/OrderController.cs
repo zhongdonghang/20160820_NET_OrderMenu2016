@@ -67,6 +67,20 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             return Content(data.ToJson());
         }
 
+        [HttpGet]
+        [HandlerAjaxOnly]
+        public ActionResult GetAllGridJson(Pagination pagination, string keyword)
+        {
+            var data = new
+            {
+                rows = objOrderApp.GetAllList(pagination, keyword, OperatorProvider.Provider.GetCurrent().OrgId),
+                total = pagination.total,
+                page = pagination.page,
+                records = pagination.records
+            };
+            return Content(data.ToJson());
+        }
+
         [HttpPost]
         [HandlerAuthorize]
         [HandlerAjaxOnly]

@@ -64,6 +64,18 @@ namespace NFine.Application.MenuService
             return service.FindList(expression, pagination);
         }
 
+        public List<T_ORDEREntity> GetAllList(Pagination pagination, string keyword, int OrgId)
+        {
+            var expression = ExtLinq.True<T_ORDEREntity>();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                expression = expression.And(t => t.OrderNo.Contains(keyword));
+            }
+            expression = expression.And(t => t.OrderNo.StartsWith(OrgId.ToString()));
+          //  expression = expression.And(t => t.OrderState == 1);
+            return service.FindList(expression, pagination);
+        }
+
 
 
         /// <summary>
