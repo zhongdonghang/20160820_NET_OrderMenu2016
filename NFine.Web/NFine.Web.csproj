@@ -745,6 +745,8 @@
     <Content Include="Areas\MenuSys\Views\MemBer\Form.cshtml" />
     <Content Include="Areas\MenuSys\Views\Seat\Form.cshtml" />
     <Content Include="Areas\MenuSys\Views\Product\SettingImageForm.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Order\Pay1.cshtml" />
+    <Content Include="Areas\MenuSys\Views\Order\PaySuccess.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

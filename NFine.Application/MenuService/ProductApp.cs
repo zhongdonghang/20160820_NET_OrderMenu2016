@@ -37,6 +37,7 @@ namespace NFine.Application.MenuService
             fileEntity.ModifiedBy = OperatorProvider.Provider.GetCurrent().UserName;
             if (fileService.Insert(fileEntity) > 0)
             {
+                bool isTrue = false;
                 int fileoid = fileService.IQueryable().Max(t => t.OID);
                 List<RS_PRODUCT_FILEEntity> rsList = fileRsProductService.FindList("select * from RS_PRODUCT_FILE where ProductID=" + productOID + "");
                 if (rsList.Count > 0)
@@ -45,6 +46,7 @@ namespace NFine.Application.MenuService
                     {
                         item.FileID = fileoid;
                         fileRsProductService.Update(item);
+                        isTrue = true;
                     }
                 }
                 else
@@ -52,9 +54,18 @@ namespace NFine.Application.MenuService
                     RS_PRODUCT_FILEEntity rsEntity = new RS_PRODUCT_FILEEntity();
                     rsEntity.FileID = fileoid;
                     rsEntity.ProductID = int.Parse(productOID);
-                    rsEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId; ;
+                    rsEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
                     fileRsProductService.Insert(rsEntity);
+                    isTrue = true;
                 }
+
+                if (isTrue) //更新商品属性
+                {
+                    T_PRODUCTEntity p = service.FindEntity(int.Parse(productOID));
+                    p.PriceString = fileEntity.FileName;
+                    service.Update(p);
+                }
+
             }
         }
 

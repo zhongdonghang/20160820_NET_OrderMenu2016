@@ -15,8 +15,20 @@
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'OID', hidden: true },
-                { label: '类别', name: 'Description', width: 100, align: 'left' },
-                { label: '菜名', name: 'CName', width: 100, align: 'left' },
+                { label: '类别', name: 'Description', width: 60, align: 'left' },
+                { label: '菜名', name: 'CName', width: 80, align: 'left' },
+
+                                {
+                                    label: '是否有图片', name: 'PriceString', width: 100, align: 'center',
+                                    formatter: function (cellvalue, options, rowObject) {
+                                        if (cellvalue == "--") {
+                                            return '无图片';
+                                        } else {
+                                            return '有图片';
+                                        }
+                                    }
+                                },
+
                 { label: '实价', name: 'Price1', width: 80, align: 'left' },
                 { label: '原价', name: 'Price2', width: 80, align: 'left' },
                 { label: '描述', name: 'PContent', width: 200, align: 'left' },

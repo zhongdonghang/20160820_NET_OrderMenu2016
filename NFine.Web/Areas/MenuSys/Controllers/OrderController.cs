@@ -1,5 +1,6 @@
 ﻿using NFine.Application.MenuService;
 using NFine.Code;
+using NFine.Domain._02_ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,33 @@ namespace NFine.Web.Areas.MenuSys.Controllers
         }
 
         /// <summary>
-        /// 获取列表显示在首页
+        /// 实际支付
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PayMoney()
+        {
+            string OrderNo =  Request.Form["OrderNo"];
+            string Price1 = Request.Form["Price1"];
+            string Price2 = Request.Form["Price2"];
+            string Dec = Request.Form["Dec"];
+            objOrderApp.Pay(OrderNo, Price1, Price2, Dec);
+            return Success("支付成功");
+        }
+
+
+        public ActionResult Pay(string keyValue)
+        {
+            FullOrder order = objOrderApp.GetOneByKey(keyValue);
+            ViewResult vr = new ViewResult();
+            vr.ViewName = "Pay1";
+            ViewDataDictionary dic = new ViewDataDictionary(order);
+            vr.ViewData = dic;
+            return vr;
+           // return Content(order.ToJson());
+        }
+
+        /// <summary>
+        /// 查询未结账订单
         /// </summary>
         /// <param name="pagination"></param>
         /// <param name="keyword"></param>
