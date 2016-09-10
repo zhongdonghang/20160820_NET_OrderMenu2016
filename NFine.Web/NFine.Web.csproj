@@ -502,6 +502,7 @@
     <Content Include="webuploader-0.1.5\webuploader.nolog.min.js" />
     <Content Include="webuploader-0.1.5\webuploader.withoutimage.js" />
     <Content Include="webuploader-0.1.5\webuploader.withoutimage.min.js" />
+    <Content Include="报表设计.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_LayoutIndex.cshtml" />

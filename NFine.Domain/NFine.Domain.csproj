@@ -48,6 +48,8 @@
     <Compile Include="02 ViewModel\FullOrder.cs" />
     <Compile Include="02 ViewModel\FullProductViewModel.cs" />
     <Compile Include="03 Entity\MenuBiz\QUICK_NOTESEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\Report_DayEntity.cs" />
+    <Compile Include="03 Entity\MenuBiz\Report_MonthEntity.cs" />
     <Compile Include="03 Entity\MenuBiz\RS_MEMBER_FILEEntity.cs" />
     <Compile Include="03 Entity\MenuBiz\RS_ORG_FILEEntity.cs" />
     <Compile Include="03 Entity\MenuBiz\RS_PRODUCT_FILEEntity.cs" />
@@ -71,6 +73,8 @@
     <Compile Include="03 Entity\SystemSecurity\LogEntity.cs" />
     <Compile Include="02 ViewModel\AuthorizeActionModel.cs" />
     <Compile Include="04 IRepository\MenuBiz\IQUICK_NOTESRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IReport_DayRepository.cs" />
+    <Compile Include="04 IRepository\MenuBiz\IReport_MonthRepository.cs" />
     <Compile Include="04 IRepository\MenuBiz\IRS_MEMBER_FILERepository.cs" />
     <Compile Include="04 IRepository\MenuBiz\IRS_ORG_FILERepository.cs" />
     <Compile Include="04 IRepository\MenuBiz\IRS_PRODUCT_FILERepository.cs" />

@@ -40,6 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuBiz\QUICK_NOTESRepository.cs" />
+    <Compile Include="MenuBiz\Report_DayRepository.cs" />
+    <Compile Include="MenuBiz\Report_MonthRepository.cs" />
     <Compile Include="MenuBiz\RS_MEMBER_FILERepository.cs" />
     <Compile Include="MenuBiz\RS_ORG_FILERepository.cs" />
     <Compile Include="MenuBiz\RS_PRODUCT_FILERepository.cs" />

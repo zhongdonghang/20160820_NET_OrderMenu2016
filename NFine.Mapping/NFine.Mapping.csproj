@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuBizMapping\QUICK_NOTESMap.cs" />
+    <Compile Include="MenuBizMapping\Report_DayMap.cs" />
+    <Compile Include="MenuBizMapping\Report_MonthMap.cs" />
     <Compile Include="MenuBizMapping\RS_MEMBER_FILEMap.cs" />
     <Compile Include="MenuBizMapping\RS_ORG_FILEMap.cs" />
     <Compile Include="MenuBizMapping\RS_PRODUCT_FILEMap.cs" />

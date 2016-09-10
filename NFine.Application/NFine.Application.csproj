@@ -50,6 +50,7 @@
     <Compile Include="MenuService\OrderApp.cs" />
     <Compile Include="MenuService\ProductApp.cs" />
     <Compile Include="MenuService\SeatApp.cs" />
+    <Compile Include="MenuService\SimpReportApp.cs" />
     <Compile Include="PageObject.cs" />
     <Compile Include="ResultObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
