@@ -21,5 +21,12 @@ namespace NFine.Domain._03_Entity.MenuBiz
         public int 年 { get; set; }
         public int 月 { get; set; }
         public int 日 { get; set; }
+
+        public string CrDateString
+        {
+            get {
+                return CrDate.ToString("yyyy年MM月dd日");
+            }
+        }
     }
 }

@@ -14,6 +14,23 @@ namespace NFine.Data.Extensions
     public class DbHelper
     {
         private static string connstring = ConfigurationManager.ConnectionStrings["NFineDbContext"].ConnectionString;
+
+        /// <summary>
+        /// 钟东航添加，执行sql server的表查询
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public static DataTable QueryDataTable(string sql)
+        {
+            DataTable dt = new DataTable();
+            using (DbConnection conn = new SqlConnection(connstring))
+            {
+                SqlDataAdapter ad = new SqlDataAdapter(sql, connstring);
+                ad.Fill(dt);
+            }
+            return dt;
+        }
+
         public static int ExecuteSqlCommand(string cmdText)
         {
             using (DbConnection conn = new SqlConnection(connstring))

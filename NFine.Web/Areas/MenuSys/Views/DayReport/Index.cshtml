@@ -4,6 +4,56 @@
 }
 
 <script>
+    $.reCreateDayReport = function (options) {
+        var defaults = {
+            prompt: "注：您确认要重新生成本店所有日报表吗，这将耗费一点时间？",
+            url: "",
+            param: [],
+            loading: "正在生成...",
+            success: null,
+            close: true
+        };
+        var options = $.extend(defaults, options);
+        if ($('[name=__RequestVerificationToken]').length > 0) {
+            options.param["__RequestVerificationToken"] = $('[name=__RequestVerificationToken]').val();
+        }
+        $.modalConfirm(options.prompt, function (r) {
+            if (r) {
+                $.loading(true, options.loading);
+                window.setTimeout(function () {
+                    $.ajax({
+                        url: options.url,
+                        data: options.param,
+                        type: "post",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.state == "success") {
+                                options.success(data);
+                                $.modalMsg(data.message, data.state);
+                            } else {
+                                $.modalAlert(data.message, data.state);
+                            }
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            $.loading(false);
+                            $.modalMsg(errorThrown, "error");
+                        },
+                        beforeSend: function () {
+                            $.loading(true, options.loading);
+                        },
+                        complete: function () {
+                            $.loading(false);
+                        }
+                    });
+                }, 500);
+            }
+        });
+
+    }
+
+</script>
+
+<script>
     $(function () {
         gridList();
     })
@@ -14,7 +64,7 @@
             height: $(window).height() - 128,
             colModel: [
                 { label: '主键', name: 'OID', hidden: true },
-                { label: '日期', name: 'CrDate', width: 130, align: 'left' },
+                { label: '日期', name: 'CrDateString', width: 130, align: 'left' },
                 { label: '订单数量', name: '订单数量', width: 130, align: 'left' },
                 { label: '营业额', name: '营业额', width: 130, align: 'left' },
                 { label: '最高单额', name: '最高单额', width: 130, align: 'left' },
@@ -32,7 +82,14 @@
         });
     }
 
-
+    function btn_reCreate() {
+        $.reCreateDayReport({
+            url: "/MenuSys/DayReport/ReCreateAllReport",
+            success: function () {
+                $.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
 </script>
 
 <div class="topPanel">
@@ -40,7 +97,10 @@
         <div class="btn-group">
             <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
-
+        <div class="btn-group">
+            <a id="NF-ReCreateAllReport" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_reCreate()"><i class="fa fa-plus"></i>重新生成所有日报表</a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
     </div>
     <div class="search">
         <table>

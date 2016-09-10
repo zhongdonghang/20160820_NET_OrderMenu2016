@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace NFine.Web.Areas.MenuSys.Controllers
 {
-    public class DayReportController : Controller
+    public class DayReportController : ControllerBase
     {
         //
         // GET: /MenuSys/DayReport/
@@ -33,5 +33,13 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             return Content(data.ToJson());
         }
 
+        [HttpPost]
+        [HandlerAuthorize]
+        [HandlerAjaxOnly]
+        public ActionResult ReCreateAllReport()
+        {
+            objSimpReportApp.CreateDayReport(OperatorProvider.Provider.GetCurrent().OrgId);
+            return Success("全部日报表生成成功。");
+        }
     }
 }
