@@ -59,7 +59,7 @@ namespace NFine.Application.MenuService
             {
                 expression = expression.And(t => t.OrderNo.Contains(keyword));
             }
-            expression = expression.And(t => t.OrderNo.StartsWith(OrgId.ToString()));
+            expression = expression.And(t => t.OrgID == OrgId);
             expression = expression.And(t => t.OrderState == 1);
             return service.FindList(expression, pagination);
         }
@@ -71,7 +71,7 @@ namespace NFine.Application.MenuService
             {
                 expression = expression.And(t => t.OrderNo.Contains(keyword));
             }
-            expression = expression.And(t => t.OrderNo.StartsWith(OrgId.ToString()));
+            expression = expression.And(t => t.OrgID==OrgId);
           //  expression = expression.And(t => t.OrderState == 1);
             return service.FindList(expression, pagination);
         }

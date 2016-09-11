@@ -49,6 +49,7 @@
     <Compile Include="MenuService\MembersApp.cs" />
     <Compile Include="MenuService\OrderApp.cs" />
     <Compile Include="MenuService\ProductApp.cs" />
+    <Compile Include="MenuService\readJSON.cs" />
     <Compile Include="MenuService\SeatApp.cs" />
     <Compile Include="MenuService\SimpReportApp.cs" />
     <Compile Include="PageObject.cs" />

@@ -1,4 +1,5 @@
-﻿using NFine.Application;
+﻿using Newtonsoft.Json;
+using NFine.Application;
 using NFine.Application.SystemManage;
 using NFine.Application.SystemSecurity;
 using NFine.Code;
@@ -25,10 +26,12 @@ namespace NFine.Application.MenuService
     /// </summary>
     public class ApiServiceApp
     {
+        #region 组织架构底层服务类
         private IOrganizeRepository orgDllService = new OrganizeRepository();
         private IUserRepository userDllService = new UserRepository();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
+        #endregion
 
         #region 订单处理底层服务类
         private IT_ORDERRepository orderservice = new T_ORDERRepository();
@@ -36,15 +39,192 @@ namespace NFine.Application.MenuService
         private IT_ORDER_CHECKOUTRepository checkOutInfoService = new T_ORDER_CHECKOUTRepository();
         #endregion
 
+        #region 商品相关底层服务类
+        private IT_PRODUCTRepository productService = new T_PRODUCTRepository();
+        private IT_PRODUCT_CATEORYRepository objCategoryservice = new T_PRODUCT_CATEORYRepository();
+        private ISYS_FILESRepository fileService = new SYS_FILESRepository();
+        private IRS_PRODUCT_FILERepository fileRsProductService = new RS_PRODUCT_FILERepository();
+        #endregion
+
+        #region 台位和员工底层服务类
+        private IT_SEATRepository seatService = new T_SEATRepository();
+        private IT_MEMBERSRepository memberService = new T_MEMBERSRepository();
+        #endregion
 
 
+        #region 私有工具方法
+
+        public List<SimpleOrder> OrderFullTableToList2(DataTable dt)
+        {
+            List<SimpleOrder> modelList = new List<SimpleOrder>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                SimpleOrder model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = new SimpleOrder();
+                    if (dt.Rows[n]["OrderNo"].ToString() != "")
+                    {
+                        model.orderNo = dt.Rows[n]["OrderNo"].ToString();
+                    }
+                    if (dt.Rows[n]["CreateTime"].ToString() != "")
+                    {
+                        model.CreateTime = DateTime.Parse(dt.Rows[n]["CreateTime"].ToString());
+                    }
+                    model.Seat = dt.Rows[n]["Seat"].ToString();
+                    if (dt.Rows[n]["PeopleNum"].ToString() != "")
+                    {
+                        model.PeopleNum = int.Parse(dt.Rows[n]["PeopleNum"].ToString());
+                    }
+                    model.MemberName = dt.Rows[n]["MemberName"].ToString();
+                    model.Dec = dt.Rows[n]["Dec"].ToString();
+                    //string sql = "select * from T_ORDER_INFO where OrderNo='" + model.orderNo + "'";
+                    //DataTable df = (DBUtility.DbHelperSQL.Query(sql)).Tables[0];
+                    //model.orderInfo = TableToList3(df);
+                    //modelList.Add(model);
+                }
+            }
+            return modelList;
+        }
+
+        /// <summary>
+        /// 员工数据表转对象列表
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public List<T_MEMBERSEntity> MembersTableToList(DataTable dt)
+        {
+            List<T_MEMBERSEntity> modelList = new List<T_MEMBERSEntity>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                T_MEMBERSEntity model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = new T_MEMBERSEntity();
+                    if (dt.Rows[n]["OID"].ToString() != "")
+                    {
+                        model.OID = int.Parse(dt.Rows[n]["OID"].ToString());
+                    }
+                    if (dt.Rows[n]["CreateOn"].ToString() != "")
+                    {
+                        model.CreateOn = DateTime.Parse(dt.Rows[n]["CreateOn"].ToString());
+                    }
+                    if (dt.Rows[n]["CreateUserId"].ToString() != "")
+                    {
+                        model.CreateUserId = int.Parse(dt.Rows[n]["CreateUserId"].ToString());
+                    }
+                    model.CreateBy = dt.Rows[n]["CreateBy"].ToString();
+                    if (dt.Rows[n]["ModifiedOn"].ToString() != "")
+                    {
+                        model.ModifiedOn = DateTime.Parse(dt.Rows[n]["ModifiedOn"].ToString());
+                    }
+                    if (dt.Rows[n]["ModifiedUserId"].ToString() != "")
+                    {
+                        model.ModifiedUserId = int.Parse(dt.Rows[n]["ModifiedUserId"].ToString());
+                    }
+                    model.ModifiedBy = dt.Rows[n]["ModifiedBy"].ToString();
+                    model.Cname = dt.Rows[n]["Cname"].ToString();
+                    model.Gender = dt.Rows[n]["Gender"].ToString();
+                    model.Introduction = dt.Rows[n]["Introduction"].ToString();
+                    if (dt.Rows[n]["OrgID"].ToString() != "")
+                    {
+                        model.OrgID = int.Parse(dt.Rows[n]["OrgID"].ToString());
+                    }
+                    if (dt.Rows[n]["DeletionStateCode"].ToString() != "")
+                    {
+                        model.DeletionStateCode = int.Parse(dt.Rows[n]["DeletionStateCode"].ToString());
+                    }
+                    if (dt.Rows[n]["Enabled"].ToString() != "")
+                    {
+                        model.Enabled = int.Parse(dt.Rows[n]["Enabled"].ToString());
+                    }
+                    if (dt.Rows[n]["SortCode"].ToString() != "")
+                    {
+                        model.SortCode = int.Parse(dt.Rows[n]["SortCode"].ToString());
+                    }
+                    model.Description = dt.Rows[n]["Description"].ToString();
+
+
+                    modelList.Add(model);
+                }
+            }
+            return modelList;
+        }
+
+        /// <summary>
+        /// 台位数据列表转为对象列表
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public List<T_SEATEntity> SeatTableToList(DataTable dt)
+        {
+            List<T_SEATEntity> modelList = new List<T_SEATEntity>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                T_SEATEntity model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = new T_SEATEntity();
+                    if (dt.Rows[n]["OID"].ToString() != "")
+                    {
+                        model.OID = int.Parse(dt.Rows[n]["OID"].ToString());
+                    }
+                    if (dt.Rows[n]["ParentID"].ToString() != "")
+                    {
+                        model.ParentID = int.Parse(dt.Rows[n]["ParentID"].ToString());
+                    }
+                    model.SeatNo = dt.Rows[n]["SeatNo"].ToString();
+                    model.SaatCategory = dt.Rows[n]["SaatCategory"].ToString();
+                    if (dt.Rows[n]["PersonNum"].ToString() != "")
+                    {
+                        model.PersonNum = int.Parse(dt.Rows[n]["PersonNum"].ToString());
+                    }
+                    if (dt.Rows[n]["OrgID"].ToString() != "")
+                    {
+                        model.OrgID = int.Parse(dt.Rows[n]["OrgID"].ToString());
+                    }
+                    model.Desc = dt.Rows[n]["Desc"].ToString();
+                    model.Status = dt.Rows[n]["Status"].ToString();
+
+
+                    modelList.Add(model);
+                }
+            }
+            return modelList;
+        }
+
+        private List<SimpleProductCateory> CategoryTableToList(DataTable dt)
+        {
+            List<SimpleProductCateory> modelList = new List<SimpleProductCateory>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                SimpleProductCateory model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = new SimpleProductCateory();
+                    if (dt.Rows[n]["OID"].ToString() != "")
+                    {
+                        model.OID = dt.Rows[n]["OID"].ToString();
+                    }
+                    model.CName = dt.Rows[n]["CName"].ToString();
+
+
+                    modelList.Add(model);
+                }
+            }
+            return modelList;
+        }
 
         /// <summary>
         /// 订单对象，数据表转对象
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public List<T_ORDEREntity> TableToList(DataTable dt)
+        private List<T_ORDEREntity> TableToList(DataTable dt)
         {
             List<T_ORDEREntity> modelList = new List<T_ORDEREntity>();
             int rowsCount = dt.Rows.Count;
@@ -90,7 +270,7 @@ namespace NFine.Application.MenuService
         /// <param name="str">要截取的字符串</param>
         /// <param name="num">返回的具体位数</param>
         /// <returns>返回结果的字符串</returns>
-        public string GetLastStr(string str, int num)
+        private string GetLastStr(string str, int num)
         {
             int count = 0;
             if (str.Length > num)
@@ -99,6 +279,267 @@ namespace NFine.Application.MenuService
                 str = str.Substring(count, num);
             }
             return str;
+        }
+        #endregion
+
+        public string ProcessingOrders(string _json, string op)
+        {
+            string resultString = "";
+            ReturnPageResult<SimpleOrder> result = new ReturnPageResult<SimpleOrder>();
+            result.ResultCode = "-1";
+            result.Msg = "查询失败";
+            try
+            {
+                readJSON rj = new readJSON();
+                result.Msg = rj.readJ3("[" + _json + "]", op);
+                if (result.Msg == "提交成功！")
+                {
+                    result.ResultCode = "200";
+                }
+            }
+            catch (Exception ex)
+            {
+                result.ResultCode = "-1";
+                result.Msg = "查询失败:" + ex.ToString();
+            }
+            resultString = JsonConvert.SerializeObject(result);
+            return resultString;
+        }
+
+        /// <summary>
+        /// 获取指定门店当天的订单列表
+        /// </summary>
+        /// <param name="_orgid"></param>
+        /// <returns></returns>
+        public string GetSimpleOrderList(string _orgid)
+        {
+            string resultString = "";
+            ReturnPageResult<SimpleOrder> result = new ReturnPageResult<SimpleOrder>();
+            result.ResultCode = "-1";
+            result.Msg = "查询失败";
+            try
+            {
+                T_ORDEREntity to = new T_ORDEREntity();
+                PageObject<SimpleOrder> page = new PageObject<SimpleOrder>();
+                string time1 = DateTime.Now.ToString("yyyy - MM - dd");//获取时间日期
+                string sql = "select T_ORDER.*,T_ORDER_INFO.* "+
+                        " from T_ORDER, T_ORDER_INFO  where T_ORDER.OrgID = "+ _orgid + " and " +
+                        " T_ORDER.OrderState = 1 and T_ORDER.CreateTime " +
+                        "   Between '"+ time1 + " 0:00:00' " +
+                        " and '"+ time1 + " 23:59:59' " +
+                        " and T_ORDER_INFO.OrderNo = T_ORDER.OrderNo " +
+                        " order by T_ORDER.CreateTime desc";
+                DataTable dt = DbHelper.QueryDataTable(sql);
+
+                List<SimpleOrder> orderList = new List<SimpleOrder>();
+                foreach (DataRow item in dt.Rows)
+                {
+                    SimpleOrder odr = new SimpleOrder();
+                    if (item["OrderNo"].ToString() != "")
+                    {
+                        odr.orderNo = item["OrderNo"].ToString();
+                    }
+
+                    int count =  orderList.Count(t => t.orderNo == odr.orderNo);
+                    if (count > 0)
+                    {
+                        continue;
+                    }
+
+                    if (item["CreateTime"].ToString() != "")
+                    {
+                        odr.CreateTime = DateTime.Parse(item["CreateTime"].ToString());
+                    }
+                    odr.Seat = item["Seat"].ToString();
+                    if (item["PeopleNum"].ToString() != "")
+                    {
+                        odr.PeopleNum = int.Parse(item["PeopleNum"].ToString());
+                    }
+                    odr.MemberName = item["MemberName"].ToString();
+                    odr.Dec = item["Dec"].ToString();
+                    orderList.Add(odr);
+                }
+                List<T_ORDER_INFOEntity> infoList = new List<T_ORDER_INFOEntity>();
+                foreach (DataRow infoItem in dt.Rows)
+                {
+                    T_ORDER_INFOEntity info = new T_ORDER_INFOEntity();
+                    if (infoItem["OID"].ToString() != "")
+                    {
+                        info.OID = int.Parse(infoItem["OID"].ToString());
+                    }
+                    info.OrderNo = infoItem["OrderNo"].ToString();
+                    info.ProductId = infoItem["ProductId"].ToString();
+                    info.ProductCname = infoItem["ProductCname"].ToString();
+                    if (infoItem["PNum"].ToString() != "")
+                    {
+                        info.PNum = float.Parse(infoItem["PNum"].ToString());
+                    }
+                    if (infoItem["Price1"].ToString() != "")
+                    {
+                        info.Price1 = decimal.Parse(infoItem["Price1"].ToString());
+                    }
+                    if (infoItem["Price2"].ToString() != "")
+                    {
+                        info.Price2 = decimal.Parse(infoItem["Price2"].ToString());
+                    }
+                    info.MemberName = infoItem["MemberName"].ToString();
+                    if (infoItem["CreateOn"].ToString() != "")
+                    {
+                        info.CreateOn = DateTime.Parse(infoItem["CreateOn"].ToString());
+                    }
+                    if (infoItem["ModifiedOn"].ToString() != "")
+                    {
+                        info.ModifiedOn = DateTime.Parse(infoItem["ModifiedOn"].ToString());
+                    }
+                    infoList.Add(info);
+                }
+
+                foreach (SimpleOrder item in orderList)
+                {
+                    item.orderInfo = new List<T_ORDER_INFOEntity>();
+                    foreach (T_ORDER_INFOEntity infoItem in infoList)
+                    {
+                        if (infoItem.OrderNo == item.orderNo)
+                        {
+                            item.orderInfo.Add(infoItem);
+                        }
+                    }
+                }
+                
+                page.Data = orderList;
+                result.Page = page;
+                result.ResultCode = "200";
+                result.Msg = "查询成功";
+            }
+            catch (Exception ex)
+            {
+                result.ResultCode = "-1";
+                result.Msg = "查询失败:" + ex.ToString();
+            }
+            resultString = JsonConvert.SerializeObject(result);
+            return resultString;
+        }
+
+        /// <summary>
+        /// 获取台位和员工信息
+        /// </summary>
+        /// <param name="_orgid"></param>
+        /// <returns></returns>
+        public string GetSeatsAndMembers(string _orgid)
+        {
+            string resultString = "";
+
+            ReturnPageResult<ApiSeatsAndEmpsModel> result = new ReturnPageResult<ApiSeatsAndEmpsModel>();
+
+            result.ResultCode = "-1";
+            result.Msg = "查询失败";
+            try
+            {
+               ApiSeatsAndEmpsModel page = new ApiSeatsAndEmpsModel();
+                string sql = "SELECT * FROM      T_MEMBERS WHERE   OrgID ='" + _orgid + "'";
+                List<T_MEMBERSEntity> Members = memberService.FindList(sql);
+                string sql2 = " select * from T_SEAT WHERE   OrgID ='" + _orgid + "'";
+                List<T_SEATEntity> Seats = seatService.FindList(sql2);
+
+                page.Seats = Seats;
+                page.Members = Members;
+
+                result.Data1 = page;
+                result.ResultCode = "200";
+                result.Msg = "查询成功";
+            }
+            catch (Exception ex)
+            {
+
+                result.ResultCode = "-1";
+                result.Msg = "查询失败:" + ex.ToString();
+            }
+            resultString = JsonConvert.SerializeObject(result);
+            return resultString;
+        }
+
+        /// <summary>
+        /// 根据类别查询商品
+        /// </summary>
+        /// <param name="_pageIndex"></param>
+        /// <param name="_pageSize"></param>
+        /// <param name="_oid"></param>
+        /// <param name="_orgid"></param>
+        /// <returns></returns>
+        public string GetProductListByPCategory(string _pageIndex,string _pageSize,string _oid,string _orgid)
+        {
+            string resultString = "";
+
+            ReturnPageResult<SimpleProduct> result = new ReturnPageResult<SimpleProduct>();
+            result.ResultCode = "-1";
+            result.Msg = "查询失败";
+            try
+            {
+                T_PRODUCTEntity tpc = new T_PRODUCTEntity();
+                PageObject<SimpleProduct> page = new PageObject<SimpleProduct>();//tpc.GetPage(_pageIndex, _pageSize, _oid, _orgid);
+
+                string sql = "select * from T_PRODUCT where PCategory = "+ _oid + " and OrgID = "+ _orgid + "";
+                List<T_PRODUCTEntity> list =   productService.FindList(sql);
+                List<SimpleProduct> listSimpleProduct = new List<SimpleProduct>();
+                foreach (var item in list)
+                {
+                    SimpleProduct sp = new SimpleProduct();
+                    sp.OID = item.OID.ToString();
+                    sp.CName = item.CName;
+                    sp.Price1 = item.Price1.ToString() ;
+                    sp.Price2 = item.Price2.ToString();
+                    sp.PIngredients = item.PContent;
+                    sp.PContent = item.PContent;
+                    sp.PPractice = item.PContent;
+                    sp.ImgName = item.PriceString;
+                    listSimpleProduct.Add(sp);
+                }
+                page.Data = listSimpleProduct;
+                result.Page = page;
+                result.ResultCode = "200";
+                result.Msg = "查询成功";
+            }
+            catch (Exception ex)
+            {
+
+                result.ResultCode = "-1";
+                result.Msg = "查询失败:" + ex.ToString();
+            }
+            resultString = JsonConvert.SerializeObject(result);
+            return resultString;
+        }
+
+        /// <summary>
+        /// 获取商品类别
+        /// </summary>
+        /// <param name="_orgid"></param>
+        /// <returns></returns>
+        public string GetProductCategoryList(string _orgid)
+        {
+            string resultString = "";
+
+            ReturnPageResult<SimpleProductCateory> result = new ReturnPageResult<SimpleProductCateory>();
+            result.ResultCode = "-1";
+            result.Msg = "查询失败";
+            try
+            {
+                T_PRODUCT_CATEORYEntity tpc = new T_PRODUCT_CATEORYEntity();
+                PageObject<SimpleProductCateory> page = new PageObject<SimpleProductCateory>(); //tpc.GetPage(_orgid);
+                string sql = "select OID,CName from T_PRODUCT_CATEORY where OrgID =" + _orgid;
+                DataTable dt = DbHelper.QueryDataTable(sql);
+                List<SimpleProductCateory> list = CategoryTableToList(dt);
+                page.Data = list;
+                result.Page = page;
+                result.ResultCode = "200";
+                result.Msg = "查询成功";
+            }
+            catch (Exception ex)
+            {
+                result.ResultCode = "-1";
+                result.Msg = "查询失败:" + ex.ToString();
+            }
+            resultString = JsonConvert.SerializeObject(result);
+            return resultString;
         }
 
         /// <summary>
