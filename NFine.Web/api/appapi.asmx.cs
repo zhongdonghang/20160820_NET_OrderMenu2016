@@ -17,6 +17,18 @@ namespace NFine.Web.api
     // [System.Web.Script.Services.ScriptService]
     public class appapi : System.Web.Services.WebService
     {
+        /// <summary>
+        /// 分页获取组织架构简单列表
+        /// </summary>
+        /// <param name="_pageIndex">页码，从1开始</param>
+        /// <param name="_pageSize">页大小</param>
+        /// <param name="_cname">名称，模糊查询</param>
+        [WebMethod(Description = "分页获取组织架构简单列表")]
+        public void GetOrgSimpleList(string _pageIndex, string _pageSize, string _cname)
+        {
+            HttpContext.Current.Response.Write(new ApiServiceApp().GetOrgSimpleList(_pageIndex,_pageSize,_cname));
+        }
+
         [WebMethod(Description = "单个订单精确查询")]
         public void GetOrderInfo(string _OrderNo)
         {

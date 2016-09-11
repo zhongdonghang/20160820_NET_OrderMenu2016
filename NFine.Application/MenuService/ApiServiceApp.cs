@@ -36,6 +36,14 @@ namespace NFine.Application.MenuService
         private IT_ORDER_CHECKOUTRepository checkOutInfoService = new T_ORDER_CHECKOUTRepository();
         #endregion
 
+
+
+
+        /// <summary>
+        /// 订单对象，数据表转对象
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public List<T_ORDEREntity> TableToList(DataTable dt)
         {
             List<T_ORDEREntity> modelList = new List<T_ORDEREntity>();
@@ -91,6 +99,47 @@ namespace NFine.Application.MenuService
                 str = str.Substring(count, num);
             }
             return str;
+        }
+
+        /// <summary>
+        /// 获取简单的组织架构信息
+        /// </summary>
+        /// <param name="_pageIndex"></param>
+        /// <param name="_pageSize"></param>
+        /// <param name="_cname"></param>
+        /// <returns></returns>
+        public string GetOrgSimpleList(string _pageIndex,string _pageSize,string _cname)
+        {
+            ReturnPageResult<SimpleOrgEntity> result = new ReturnPageResult<SimpleOrgEntity>();
+            try
+            {
+                string sql = "select * from Sys_Organize where F_EnCode = 'Store' ";
+                if (!string.IsNullOrEmpty(_cname))
+                {
+                    sql += " and F_FullName like '%"+_cname+"%'";
+                }
+
+                List<OrganizeEntity> list = orgDllService.FindList(sql);
+                PageObject<SimpleOrgEntity> page = new PageObject<SimpleOrgEntity>();
+                List <SimpleOrgEntity> simpleList   = new List<SimpleOrgEntity>();
+                foreach (var item in list)
+                {
+                    SimpleOrgEntity se = new SimpleOrgEntity();
+                    se.OID = item.OrgNo.ToString();
+                    se.LongName = item.F_FullName;
+                    simpleList.Add(se);
+                }
+                page.Data = simpleList;
+                result.Page = page;
+                result.ResultCode = "200";
+                result.Msg = "查询成功";
+            }
+            catch (Exception ex)
+            {
+                result.ResultCode = "-1";
+                result.Msg = "异常:"+ex;
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(result);
         }
 
         /// <summary>
@@ -165,7 +214,6 @@ namespace NFine.Application.MenuService
         /// <returns></returns>
         public string GetOrderInfo(string _OrderNo)
         {
-            string resultString = "";
             ReturnPageResult<ApiOrderAndInfosModel> result = new ReturnPageResult<ApiOrderAndInfosModel>();
             try
             {

@@ -48,6 +48,7 @@
     <Compile Include="02 ViewModel\AppRegsiterResult.cs" />
     <Compile Include="02 ViewModel\FullOrder.cs" />
     <Compile Include="02 ViewModel\FullProductViewModel.cs" />
+    <Compile Include="02 ViewModel\SimpleOrgEntity.cs" />
     <Compile Include="03 Entity\MenuBiz\QUICK_NOTESEntity.cs" />
     <Compile Include="03 Entity\MenuBiz\Report_DayEntity.cs" />
     <Compile Include="03 Entity\MenuBiz\Report_MonthEntity.cs" />
