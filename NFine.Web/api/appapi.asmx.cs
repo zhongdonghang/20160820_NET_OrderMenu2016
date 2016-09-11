@@ -17,7 +17,22 @@ namespace NFine.Web.api
     // [System.Web.Script.Services.ScriptService]
     public class appapi : System.Web.Services.WebService
     {
-        
+        [WebMethod(Description = "单个订单精确查询")]
+        public void GetOrderInfo(string _OrderNo)
+        {
+            HttpContext.Current.Response.Write(new ApiServiceApp().GetOrderInfo(_OrderNo));
+        }
+
+        /// <summary>
+        /// 获取订单号
+        /// </summary>
+        /// <param name="_orgid"></param>
+        [WebMethod(Description = "获取订单号")]
+        public void GetOrderNo(string _orgid)
+        {
+            HttpContext.Current.Response.Write(new ApiServiceApp().GetOrderNo(_orgid));
+        }
+
         [WebMethod(Description = "app登录方法")]
         public void AppLoginV2(string loginName, string loginPass)
         {

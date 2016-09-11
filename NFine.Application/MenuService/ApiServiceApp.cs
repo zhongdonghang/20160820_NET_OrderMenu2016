@@ -2,13 +2,18 @@
 using NFine.Application.SystemManage;
 using NFine.Application.SystemSecurity;
 using NFine.Code;
+using NFine.Data.Extensions;
 using NFine.Domain._02_ViewModel;
+using NFine.Domain._03_Entity.MenuBiz;
+using NFine.Domain._04_IRepository.MenuBiz;
 using NFine.Domain.Entity.SystemManage;
 using NFine.Domain.Entity.SystemSecurity;
 using NFine.Domain.IRepository.SystemManage;
+using NFine.Repository.MenuBiz;
 using NFine.Repository.SystemManage;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +28,161 @@ namespace NFine.Application.MenuService
         private IOrganizeRepository orgDllService = new OrganizeRepository();
         private IUserRepository userDllService = new UserRepository();
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
+
+
+        #region 订单处理底层服务类
+        private IT_ORDERRepository orderservice = new T_ORDERRepository();
+        private IT_ORDER_INFORepository orderInfoService = new T_ORDER_INFORepository();
+        private IT_ORDER_CHECKOUTRepository checkOutInfoService = new T_ORDER_CHECKOUTRepository();
+        #endregion
+
+        public List<T_ORDEREntity> TableToList(DataTable dt)
+        {
+            List<T_ORDEREntity> modelList = new List<T_ORDEREntity>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                T_ORDEREntity model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = new T_ORDEREntity();
+                    if (dt.Rows[n]["OID"].ToString() != "")
+                    {
+                        model.OID = int.Parse(dt.Rows[n]["OID"].ToString());
+                    }
+                    model.OrderNo = dt.Rows[n]["OrderNo"].ToString();
+                    if (dt.Rows[n]["CreateTime"].ToString() != "")
+                    {
+                        model.CreateTime = DateTime.Parse(dt.Rows[n]["CreateTime"].ToString());
+                    }
+                    model.Seat = dt.Rows[n]["Seat"].ToString();
+                    if (dt.Rows[n]["PeopleNum"].ToString() != "")
+                    {
+                        model.PeopleNum = int.Parse(dt.Rows[n]["PeopleNum"].ToString());
+                    }
+                    model.MemberName = dt.Rows[n]["MemberName"].ToString();
+                    model.Dec = dt.Rows[n]["Dec"].ToString();
+                    if (dt.Rows[n]["OrderState"].ToString() != "")
+                    {
+                        model.OrderState = int.Parse(dt.Rows[n]["OrderState"].ToString());
+                    }
+                    if (dt.Rows[n]["ModifiedOn"].ToString() != "")
+                    {
+                        model.ModifiedOn = DateTime.Parse(dt.Rows[n]["ModifiedOn"].ToString());
+                    }
+                    modelList.Add(model);
+                }
+            }
+            return modelList;
+        }
+
+        /// <summary>
+        /// 获取后几位数
+        /// </summary>
+        /// <param name="str">要截取的字符串</param>
+        /// <param name="num">返回的具体位数</param>
+        /// <returns>返回结果的字符串</returns>
+        public string GetLastStr(string str, int num)
+        {
+            int count = 0;
+            if (str.Length > num)
+            {
+                count = str.Length - num;
+                str = str.Substring(count, num);
+            }
+            return str;
+        }
+
+        /// <summary>
+        /// 自动生成订单号返回
+        /// </summary>
+        /// <param name="_orgid"></param>
+        /// <returns></returns>
+        public string GetOrderNo(string _orgid)
+        {
+            ReturnPageResult<T_ORDEREntity> result = new ReturnPageResult<T_ORDEREntity>();
+            result.ResultCode = "-1";
+            result.Msg = "查询失败";
+            try
+            {
+                T_ORDEREntity mto = new T_ORDEREntity();
+               // better.BLL.T_ORDER bto = new T_ORDER();
+                string orderNo = string.Empty;//返回的字符串
+                string adoString = string.Empty;//临时字符串
+                string time1 = DateTime.Now.ToLongDateString();
+                string sql = "select top 1 * FROM      T_ORDER where OrderNo like '" + _orgid + "%' and CreateTime > '" + Convert.ToDateTime(time1) + "' ORDER BY CreateTime DESC";
+
+                DataTable dt = DbHelper.QueryDataTable(sql);//(DBUtility.DbHelperSQL.Query(sql)).Tables[0];
+                List<T_ORDEREntity> lmto = TableToList(dt);
+                if (lmto.Count == 0)
+                {
+                    mto.OrderNo = orderNo = _orgid + DateTime.Now.ToString("yyyyMMdd") + "10001";
+                    mto.CreateTime = DateTime.Now;
+
+                    mto.Seat = "--";
+                    mto.PeopleNum = 0;
+                    mto.MemberName = "--";
+                    mto.Dec = "--";
+                    mto.OrderState = 0;
+                    mto.ModifiedOn = DateTime.Now;
+                    orderservice.Insert(mto);//bto.Add(mto);//将新生成的订单号存进数据库
+                }
+                else
+                {
+                    foreach (var item in lmto)
+                    {
+                        adoString = GetLastStr(item.OrderNo, 5);
+                    }
+                    int num = Convert.ToInt32(adoString) + 1;
+                    mto.OrderNo = orderNo = _orgid + DateTime.Now.ToString("yyyyMMdd") + num.ToString();
+                    mto.CreateTime = DateTime.Now;
+
+                    mto.Seat = "--";
+                    mto.PeopleNum = 0;
+                    mto.MemberName = "--";
+                    mto.Dec = "--";
+                    mto.OrderState = 0;
+                    mto.ModifiedOn = DateTime.Now;
+                    orderservice.Insert(mto);//将新生成的订单号存进数据库
+                }
+                result.strNo = mto.OrderNo;
+                result.Msg = "生成订单号成功";
+                result.ResultCode = "200";
+            }
+            catch (Exception ex)
+            {
+                result.ResultCode = "-1";
+                result.Msg = "异常:"+ex;
+            }
+
+            return Newtonsoft.Json.JsonConvert.SerializeObject(result);
+        }
+
+        /// <summary>
+        /// 查询指定单号订单明细信息
+        /// </summary>
+        /// <param name="_OrderNo"></param>
+        /// <returns></returns>
+        public string GetOrderInfo(string _OrderNo)
+        {
+            string resultString = "";
+            ReturnPageResult<ApiOrderAndInfosModel> result = new ReturnPageResult<ApiOrderAndInfosModel>();
+            try
+            {
+                ApiOrderAndInfosModel objApiOrderAndInfosModel = new ApiOrderAndInfosModel();
+                objApiOrderAndInfosModel.order = orderservice.FindList(" select * from T_ORDER WHERE   OrderNo ='" + _OrderNo + "'");
+                objApiOrderAndInfosModel.order_info = orderInfoService.FindList("SELECT * FROM T_ORDER_INFO WHERE   OrderNo ='" + _OrderNo + "'");
+                result.Data1 = objApiOrderAndInfosModel;
+                result.Msg = "查询成功";
+                result.ResultCode = "200";
+            }
+            catch (Exception ex)
+            {
+                result.Msg = "异常:"+ex;
+                result.ResultCode = "-1";
+            }
+            return Newtonsoft.Json.JsonConvert.SerializeObject(result);
+        }
 
         /// <summary>
         /// App登录
