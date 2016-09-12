@@ -83,8 +83,9 @@ namespace NFine.Application.MenuService
                     string strWhere = " OrderNo='" + orderid + "'";
                     if (op == "add")
                     {
-                      //  mto = bto.GetModel(strWhere);
-                        mto = orderservice.FindEntity("select * from T_ORDER where OrderNo = '"+ orderid + "'");
+                        //  mto = bto.GetModel(strWhere);
+                        string sql = "select * from T_ORDER where OrderNo = '" + orderid + "'";
+                        mto = orderservice.FindList(sql)[0];
                         mto.MemberName = EmpNo = item["EmpNo"].ToString();
                         mto.PeopleNum = Convert.ToInt32(item["PersonNum"].ToString());
                         mto.Seat = item["SeatNo"].ToString();
@@ -105,14 +106,16 @@ namespace NFine.Application.MenuService
                             mtoi.MemberName = EmpNo;
                             mtoi.OrderNo = orderid;
                             mtoi.CreateOn = DateTime.Now;
+                            mtoi.ModifiedOn = DateTime.Now;
                             orderInfoService.Insert(mtoi);
                           //  btoi.Add(mtoi);
                         }
                     }
                     if (op == "edit")
                     {
-                      //  mto = bto.GetModel(strWhere);
-                        mto = orderservice.FindEntity("select * from T_ORDER where OrderNo = '"+ orderid + "'");
+                        //  mto = bto.GetModel(strWhere);
+                        string sql = "select * from T_ORDER where OrderNo = '" + orderid + "'";
+                        mto = orderservice.FindList(sql)[0];
                         mto.MemberName = EmpNo = item["EmpNo"].ToString();
                         mto.PeopleNum = Convert.ToInt32(item["PersonNum"].ToString());
                         mto.Seat = item["SeatNo"].ToString();
@@ -135,7 +138,7 @@ namespace NFine.Application.MenuService
                             mtoi.MemberName = EmpNo;
                             mtoi.OrderNo = orderid;
                             mtoi.CreateOn = DateTime.Now;
-                            // btoi.Add(mtoi);
+                            mtoi.ModifiedOn = DateTime.Now;
                             orderInfoService.Insert(mtoi);
                         }
                     }

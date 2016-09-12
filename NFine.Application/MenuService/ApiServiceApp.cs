@@ -608,7 +608,7 @@ namespace NFine.Application.MenuService
                 {
                     mto.OrderNo = orderNo = _orgid + DateTime.Now.ToString("yyyyMMdd") + "10001";
                     mto.CreateTime = DateTime.Now;
-
+                    mto.OrgID = int.Parse(_orgid);
                     mto.Seat = "--";
                     mto.PeopleNum = 0;
                     mto.MemberName = "--";
@@ -626,7 +626,7 @@ namespace NFine.Application.MenuService
                     int num = Convert.ToInt32(adoString) + 1;
                     mto.OrderNo = orderNo = _orgid + DateTime.Now.ToString("yyyyMMdd") + num.ToString();
                     mto.CreateTime = DateTime.Now;
-
+                    mto.OrgID = int.Parse(_orgid);
                     mto.Seat = "--";
                     mto.PeopleNum = 0;
                     mto.MemberName = "--";
