@@ -24,6 +24,9 @@ namespace NFine.Code
         public bool IsSystem { get; set; }
 
         #region 钟东航添加 组织机构ID
+        public string CompanyName { get; set; }
+        public string CompanyAddr { get; set; }
+        public string CompanyPhone { get; set; }
         public int OrgId { get; set; } 
         #endregion
     }

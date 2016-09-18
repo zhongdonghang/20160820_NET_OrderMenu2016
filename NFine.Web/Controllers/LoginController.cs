@@ -73,6 +73,12 @@ namespace NFine.Web.Controllers
                     operatorModel.UserCode = userEntity.F_Account;
                     operatorModel.UserName = userEntity.F_RealName;
                     operatorModel.CompanyId = userEntity.F_OrganizeId;
+
+                   var org = new OrganizeApp().GetForm(userEntity.F_OrganizeId);
+
+                    operatorModel.CompanyName = org.F_FullName;
+                    operatorModel.CompanyPhone = org.F_TelePhone;
+                    operatorModel.CompanyAddr = org.F_Address;
                     operatorModel.DepartmentId = userEntity.F_DepartmentId;
                     operatorModel.RoleId = userEntity.F_RoleId;
                     operatorModel.LoginIPAddress = Net.Ip;

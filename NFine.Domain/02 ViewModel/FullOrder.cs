@@ -1,4 +1,6 @@
-﻿using NFine.Domain._03_Entity.MenuBiz;
+﻿using NFine.Code;
+using NFine.Domain._03_Entity.MenuBiz;
+using NFine.Domain.Entity.SystemManage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,48 @@ namespace NFine.Domain._02_ViewModel
 {
     public class FullOrder
     {
+        public string CompanyName
+        {
+            get
+            {
+                return OperatorProvider.Provider.GetCurrent().CompanyName;
+            }
+        }
+
+        public string CompanyPhone
+        {
+            get
+            {
+                return OperatorProvider.Provider.GetCurrent().CompanyPhone ;
+            }
+        }
+
+        public string CompanyAddr
+        {
+            get
+            {
+                return OperatorProvider.Provider.GetCurrent().CompanyAddr;
+            }
+        }
+
+        public string OrderStatusDesc
+        {
+            get {
+                string str = "";
+                if (Order.OrderState == 0)
+                {
+                    str = "未生效";
+                }else if (Order.OrderState == 1)
+                {
+                    str = "未支付";
+                }else if (Order.OrderState == 2)
+                {
+                    str = "已支付";
+                }
+                return str;
+            }
+        }
+
         /// <summary>
         /// 订单主信息
         /// </summary>

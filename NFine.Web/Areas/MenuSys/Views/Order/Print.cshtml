@@ -1,0 +1,133 @@
+﻿@model NFine.Domain._02_ViewModel.FullOrder
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<script src="~/Content/js/jqprint/jquery.jqprint-0.3.js"></script>
+<link media="print" href="~/Content/js/jqprint/jquery.jqprint.css" rel="stylesheet" />
+<script>
+    $(function () {
+        top.$(".content-iframe").css("background-color", "#f9f9f9");
+    })
+    function btn_print() {
+        $("#print").jqprint();
+    }
+
+    function btn_back() {
+        history.back(-1);
+    }
+</script>
+<div style="position: absolute; top: 22px; right: 8px;">
+    <a class="btn btn-default " onclick="btn_print()"><i class="fa fa-print" style="margin-right: 5px; font-size: 13px;"></i>直接打印</a>
+    <p></p>
+    <a class="btn btn-default " onclick="btn_back()"><i class="fa fa-print" style="margin-right: 5px; font-size: 13px;"></i>关闭返回</a>
+</div>
+<div class="price-box">
+    <div id="print">
+        <div class="price-title">
+         @Model.CompanyName
+        </div>
+        <div class="price-subtitle">
+            <p>@Model.CompanyAddr</p>
+            <p>电话：@Model.CompanyAddr/p>
+        </div>
+        <div class="price-title">
+            订&nbsp;单&nbsp;明&nbsp;细
+        </div>
+        <div class="price-info">
+            <table class="form">
+                <tr>
+                    <th class="formTitle">单&nbsp;&nbsp;&nbsp;&nbsp;号：</th>
+                    <td class="formValue" style="padding-right: 20px;">
+                        <input type="text" class="form-control" value=" @Model.Order.OrderNo" />
+                    </td>
+                    <th class="formTitle">下单时间：</th>
+                    <td class="formValue">
+                        <input type="text" class="form-control" value=" @Model.Order.CreateTime" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">台&nbsp;&nbsp;&nbsp;&nbsp;位：</th>
+                    <td class="formValue" style="padding-right: 20px;">
+                        <input type="text" class="form-control " value=" @Model.Order.Seat" />
+                    </td>
+                    <th class="formTitle">人&nbsp;&nbsp;&nbsp;&nbsp;数：</th>
+                    <td class="formValue">
+                        <input type="text" class="form-control " value=" @Model.Order.PeopleNum" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">金&nbsp;&nbsp;&nbsp;&nbsp;额：</th>
+                    <td class="formValue" style="padding-right: 20px;">
+                        <input type="text" class="form-control" value=" @Model.Total" />
+                    </td>
+                    <th class="formTitle">订单状态：</th>
+                    <td class="formValue">
+                        <input type="text" class="form-control " value=" @Model.OrderStatusDesc" />
+                    </td>
+                </tr>
+                <tr>
+                    <th class="formTitle">备&nbsp;&nbsp;&nbsp;&nbsp;注：</th>
+                    <td class="formValue" style="padding-right: 20px;" colspan="3">
+                        <input type="text" class="form-control " value=" @Model.Order.Dec " />
+                    </td>
+   
+                </tr>
+                @*<tr>
+                    <th class="formTitle">报价人：</th>
+                    <td class="formValue" style="padding-right: 20px;">
+                        <input type="text" class="form-control " value="李天福" />
+                    </td>
+                    <th class="formTitle">日&nbsp;&nbsp;&nbsp;&nbsp;期：</th>
+                    <td class="formValue">
+                        <input type="text" class="form-control " value="@NFine.Code.Ext.ToDateString()" />
+                    </td>
+                </tr>*@
+            </table>
+        </div>
+        <div class="price-table">
+            <table class="form" cellpadding="4" cellspacing="4">
+                <tr>
+                    <th>品名</th>
+                    <th>数量</th>
+                    <th>单价</th>
+                    <th>服务员</th>
+                    <th>下单时间</th>
+                </tr>
+                @foreach (var item in Model.OrderDetails)
+                {
+                    <tr>
+                        <td>@item.ProductCname</td>
+                        <td>@item.PNum</td>
+                        <td>@item.Price1</td>
+                        <td>@item.MemberName</td>
+                        <td>@item.CreateOn</td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div class="price-info">
+            <table class="form">
+                <tr>
+                    <th class="formTitle">日&nbsp;&nbsp;&nbsp;&nbsp;期：</th>
+                    <td class="formValue">
+                        <input type="text" class="form-control" style="width: 150px" />
+                    </td>
+                </tr>
+            </table>
+            <table class="form">
+                <tr>
+                    <th class="formTitle">签&nbsp;&nbsp;&nbsp;&nbsp;字：</th>
+                    <td class="formValue">
+                        <input type="text" class="form-control" style="width: 150px" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        @*<div class="sign ok" style="height: 150px; width: 150px; top: 89px; left: 724px;position:absolute;">
+            <img src="/Content/js/zsign/signet.gif" draggable="false">
+        </div>*@
+    </div>
+</div>

@@ -21,6 +21,19 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             return View();
         }
 
+        public ViewResult Print()
+        {
+
+            FullOrder order = objOrderApp.GetOneByKey(Request.Params["OID"]);
+            ViewResult vr = new ViewResult();
+            vr.ViewName = "Print";
+            ViewDataDictionary dic = new ViewDataDictionary(order);
+            vr.ViewData = dic;
+            return vr;
+            //string OID = Request.Params["OID"];
+            //return View("Print");
+        }
+
         /// <summary>
         /// 实际支付
         /// </summary>
