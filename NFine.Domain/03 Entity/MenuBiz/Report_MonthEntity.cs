@@ -16,6 +16,8 @@ namespace NFine.Domain._03_Entity.MenuBiz
         public decimal 平均单额 { get; set; }
         public int 平均日订单量 { get; set; }
         public decimal 平均日订单额 { get; set; }
+        public int OrgID { get; set; }
+        public DateTime CrDate { get; set; }
         public int 年 { get; set; }
         public int 月 { get; set; }
         public int 日 { get; set; }

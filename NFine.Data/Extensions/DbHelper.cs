@@ -31,6 +31,22 @@ namespace NFine.Data.Extensions
             return dt;
         }
 
+        /// <summary>
+        /// 钟东航添加，执行sql server的表查询
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public static DataSet QueryDataSet(string sql)
+        {
+            DataSet ds = new DataSet();
+            using (DbConnection conn = new SqlConnection(connstring))
+            {
+                SqlDataAdapter ad = new SqlDataAdapter(sql, connstring);
+                ad.Fill(ds);
+            }
+            return ds;
+        }
+
         public static int ExecuteSqlCommand(string cmdText)
         {
             using (DbConnection conn = new SqlConnection(connstring))

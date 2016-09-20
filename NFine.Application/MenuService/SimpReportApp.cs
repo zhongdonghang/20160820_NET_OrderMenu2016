@@ -16,10 +16,26 @@ namespace NFine.Application.MenuService
     {
 
         private IReport_DayRepository service = new Report_DayRepository();
+        private IReport_MonthRepository monthService = new Report_MonthRepository();
 
         private IT_ORDERRepository orderService = new T_ORDERRepository();
         private IT_ORDER_INFORepository orderInfoService = new T_ORDER_INFORepository();
         private IT_ORDER_CHECKOUTRepository checkOutInfoService = new T_ORDER_CHECKOUTRepository();
+
+        /// <summary>
+        /// 查询获得月报表
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="OrgId"></param>
+        /// <returns></returns>
+        public List<Report_MonthEntity> GetMonthList(Pagination pagination, int OrgId)
+        {
+            var expression = ExtLinq.True<Report_MonthEntity>();
+            expression = expression.And(t => t.OrgID == OrgId);
+            return monthService.FindList(expression, pagination);
+        }
+
+
 
         /// <summary>
         ///查询日报表

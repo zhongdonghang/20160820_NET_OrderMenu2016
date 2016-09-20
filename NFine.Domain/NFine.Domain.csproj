@@ -49,6 +49,10 @@
     <Compile Include="02 ViewModel\AppRegsiterResult.cs" />
     <Compile Include="02 ViewModel\FullOrder.cs" />
     <Compile Include="02 ViewModel\FullProductViewModel.cs" />
+    <Compile Include="02 ViewModel\HomeDefaultViewModel.cs" />
+    <Compile Include="02 ViewModel\HomePageSalesTop5ProductViewModel.cs" />
+    <Compile Include="02 ViewModel\HomePageTimesOrderCountViewModel.cs" />
+    <Compile Include="02 ViewModel\HomePageTopViewModel.cs" />
     <Compile Include="02 ViewModel\SimpleOrder.cs" />
     <Compile Include="02 ViewModel\SimpleOrgEntity.cs" />
     <Compile Include="02 ViewModel\SimpleProduct.cs" />

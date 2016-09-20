@@ -3,4 +3,49 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
-月报表
+
+<script>
+    $(function () {
+        gridList();
+    })
+    function gridList() {
+        var $gridList = $("#gridList");
+        $gridList.dataGrid({
+            url: "/MenuSys/MonthReport/GetGridJson",
+            height: $(window).height() - 128,
+            colModel: [
+                { label: '主键', name: 'OID', hidden: true },
+                { label: '日期', name: 'CrDateString', width: 100, align: 'left' },
+                { label: '订单数量', name: '订单数量', width: 100, align: 'left' },
+                { label: '营业额', name: '营业额', width: 100, align: 'left' },
+                { label: '最高单额', name: '最高单额', width: 100, align: 'left' },
+                { label: '最低单额', name: '最低单额', width: 100, align: 'left' },
+                { label: '平均单额', name: '平均单额', width: 100, align: 'left' },
+                { label: '平均日订单量', name: '平均日订单量', width: 100, align: 'left' },
+                { label: '平均日订单额', name: '平均日订单额', width: 100, align: 'left' }
+            ],
+            pager: "#gridPager",
+            sortname: 'CrDate desc',
+            viewrecords: true
+        });
+        $("#btn_search").click(function () {
+            $gridList.jqGrid('setGridParam', {
+                postData: { keyword: $("#txt_keyword").val() },
+            }).trigger('reloadGrid');
+        });
+    }
+
+</script>
+
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <script>$('.toolbar').authorizeButton()</script>
+    </div>
+</div>
+<div class="gridPanel">
+    <table id="gridList"></table>
+    <div id="gridPager"></div>
+</div>

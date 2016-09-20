@@ -4,8 +4,10 @@
  * Description: NFine快速开发平台
  * Website：http://www.nfine.cn
 *********************************************************************************/
+using NFine.Application.MenuService;
 using NFine.Application.SystemManage;
 using NFine.Code;
+using NFine.Domain._02_ViewModel;
 using NFine.Domain.Entity.SystemManage;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +18,8 @@ namespace NFine.Web.Controllers
     [HandlerLogin]
     public class HomeController : Controller
     {
+        HomePageServiceApp app = new HomePageServiceApp();
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -23,10 +27,21 @@ namespace NFine.Web.Controllers
             return View();
         }
         [HttpGet]
-        public ActionResult Default()
+        public ViewResult Default()
         {
-            return View();
+            HomeDefaultViewModel vm = app.GetHomePageVM();
+
+           // FullOrder order = objOrderApp.GetOneByKey(Request.Params["OID"]);
+            ViewResult vr = new ViewResult();
+            vr.ViewName = "Default";
+            ViewDataDictionary dic = new ViewDataDictionary(vm);
+            vr.ViewData = dic;
+
+            return vr;
         }
+
+
+
         [HttpGet]
         public ActionResult About()
         {

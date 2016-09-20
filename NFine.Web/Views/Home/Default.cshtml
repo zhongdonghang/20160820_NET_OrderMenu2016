@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model NFine.Domain._02_ViewModel.HomeDefaultViewModel
+
+<!DOCTYPE html>
 <html>
 <head>
     <title></title>
@@ -17,7 +19,7 @@
         function GetSalaryChart() {
             var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
             var lineChartData = {
-                labels: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "8月", "10月", "11月", "12月"],
+                labels: ["2:00时", "4:00时", "6:00时", "8:00时", "10:00时", "12:00时", "14:00时", "16:00时", "18:00时", "20:00时", "22:00时", "0:00时"],
                 datasets: [
                     {
                         label: "My First dataset",
@@ -27,17 +29,7 @@
                         pointStrokeColor: "#fff",
                         pointHighlightFill: "#fff",
                         pointHighlightStroke: "rgba(220,220,220,1)",
-                        data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
-                    },
-                    {
-                        label: "My Second dataset",
-                        fillColor: "rgba(151,187,205,0.2)",
-                        strokeColor: "rgba(151,187,205,1)",
-                        pointColor: "rgba(151,187,205,1)",
-                        pointStrokeColor: "#fff",
-                        pointHighlightFill: "#fff",
-                        pointHighlightStroke: "rgba(151,187,205,1)",
-                        data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+                        data: [@Model.ObjHomePageTimesOrderCountViewModel.Hours2, @Model.ObjHomePageTimesOrderCountViewModel.Hours4, @Model.ObjHomePageTimesOrderCountViewModel.Hours6, @Model.ObjHomePageTimesOrderCountViewModel.Hours8, @Model.ObjHomePageTimesOrderCountViewModel.Hours10, @Model.ObjHomePageTimesOrderCountViewModel.Hours12, @Model.ObjHomePageTimesOrderCountViewModel.Hours14, @Model.ObjHomePageTimesOrderCountViewModel.Hours16, @Model.ObjHomePageTimesOrderCountViewModel.Hours18, @Model.ObjHomePageTimesOrderCountViewModel.Hours20, @Model.ObjHomePageTimesOrderCountViewModel.Hours22, @Model.ObjHomePageTimesOrderCountViewModel.Hours0]
                     }
                 ]
             }
@@ -49,35 +41,45 @@
         }
         function GetLeaveChart() {
             var randomScalingFactor = function () { return Math.round(Math.random() * 100) };
-            var a_value = randomScalingFactor();
-            var b_value = randomScalingFactor();
-            var c_value = randomScalingFactor();
-            var d_value = randomScalingFactor();
+
+            var a_value = @Model.ObjHomePageSalesTop5ProductViewModel.Top1ProductCount;
+            var b_value = @Model.ObjHomePageSalesTop5ProductViewModel.Top2ProductCount;
+            var c_value = @Model.ObjHomePageSalesTop5ProductViewModel.Top3ProductCount;
+            var d_value = @Model.ObjHomePageSalesTop5ProductViewModel.Top1ProductCount;
+
+            var a_name = @Model.ObjHomePageSalesTop5ProductViewModel.Top1ProductName;
+            var b_name = @Model.ObjHomePageSalesTop5ProductViewModel.Top2ProductName;
+            var c_name = @Model.ObjHomePageSalesTop5ProductViewModel.Top3ProductName;
+            var d_name = @Model.ObjHomePageSalesTop5ProductViewModel.Top4ProductName;
+
+            alert("ok");
+
             var doughnutData = [
 	            {
 	                value: a_value,
 	                color: "#F7464A",
 	                highlight: "#FF5A5E",
-	                label: "事假"
+	                label:  a_name
 	            },
 	            {
 	                value: b_value,
 	                color: "#46BFBD",
 	                highlight: "#5AD3D1",
-	                label: "病假"
+	                label: b_name
 	            },
 	            {
 	                value: c_value,
 	                color: "#FDB45C",
 	                highlight: "#FFC870",
-	                label: "公休假"
+	                label:c_name
 	            },
 	            {
 	                value: d_value,
 	                color: "#949FB1",
 	                highlight: "#A8B3C5",
-	                label: "调休假"
+	                label:d_name
 	            }
+
             ];
             var ctx = document.getElementById("leavechart").getContext("2d");
             window.myDoughnut = new Chart(ctx).Doughnut(doughnutData, { responsive: false });
@@ -101,8 +103,8 @@
                 <div class="panel-body">
                     <div class="dashboard-stats">
                         <div class="dashboard-stats-item" style="background-color: #fc8675;">
-                            <h2 class="m-top-none">8</h2>
-                            <h5>当前在线订单</h5>
+                            <h2 class="m-top-none">@Model.ObjHomePageTopViewModel.当前在线订单数</h2>
+                            <h5>当前在线订单数</h5>
                             <div class="stat-icon">
                                 <i class="fa fa-user fa-3x"></i>
                             </div>
@@ -110,8 +112,8 @@
                     </div>
                     <div class="dashboard-stats">
                         <div class="dashboard-stats-item" style="background-color: #6bafbd;">
-                            <h2 class="m-top-none">12</h2>
-                            <h5>当天所有订单</h5>
+                            <h2 class="m-top-none">@Model.ObjHomePageTopViewModel.当天订单总数</h2>
+                            <h5>当天所有订单数</h5>
                             <div class="stat-icon">
                                 <i class="fa fa-hdd-o fa-3x"></i>
                             </div>
@@ -119,8 +121,8 @@
                     </div>
                     <div class="dashboard-stats">
                         <div class="dashboard-stats-item" style="background-color: #f3ce85;">
-                            <h2 class="m-top-none">2</h2>
-                            <h5>当天销售额</h5>
+                            <h2 class="m-top-none">@Model.ObjHomePageTopViewModel.当天销售总额</h2>
+                            <h5>当天总销售额</h5>
                             <div class="stat-icon">
                                 <i class="fa fa-shopping-cart fa-3x"></i>
                             </div>
@@ -128,8 +130,8 @@
                     </div>
                     <div class="dashboard-stats">
                         <div class="dashboard-stats-item" style="background-color: #949FB1;">
-                            <h2 class="m-top-none">6</h2>
-                            <h5>本月交易订单金额</h5>
+                            <h2 class="m-top-none">@Model.ObjHomePageTopViewModel.当天已收金额</h2>
+                            <h5>当天已收金额</h5>
                             <div class="stat-icon">
                                 <i class="fa fa-gavel fa-3x"></i>
                             </div>
@@ -137,8 +139,8 @@
                     </div>
                     <div class="dashboard-stats">
                         <div class="dashboard-stats-item" style="background-color: #65cea7; margin-right: 0px;">
-                            <h2 class="m-top-none">268</h2>
-                            <h5>本月交易订单数量</h5>
+                            <h2 class="m-top-none">@Model.ObjHomePageTopViewModel.当天平均单额</h2>
+                            <h5>当天平均单额</h5>
                             <div class="stat-icon">
                                 <i class="fa fa-truck fa-3x"></i>
                             </div>
@@ -148,15 +150,15 @@
             </div>
         </div>
         <div class="rows" style="margin-bottom: 1%; overflow: hidden;">
-            <div style="float: left; width: 69%;">
+            <div style="float: left; width: 99%;"><!--此处可以调整宽度以放置右边的div，请看下方已经注释的代码-->
                 <div style="height: 350px; border: 1px solid #e6e6e6; background-color: #fff;">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-area-chart fa-lg" style="padding-right: 5px;"></i>销售统计
-                        <div style="float: right">
+                            <i class="fa fa-area-chart fa-lg" style="padding-right: 5px;"></i>分时段订单单量统计表
+                        @*<div style="float: right">
                             <span style="font-weight: 500;"><i class="fa fa-square" style="color: #dcdcdc; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>迟到</span>
                             <span style="margin-left: 10px; font-weight: 500;"><i class="fa fa-square" style="color: #97bbcd; font-size: 20px; padding-right: 5px; vertical-align: middle; margin-top: -3px;"></i>缺卡</span>
-                        </div>
+                        </div>*@
                         </div>
                         <div class="panel-body" style="padding-bottom: 0px;">
                             <canvas id="salarychart" style="height: 285px; width: 100%; padding-right: 10px;"></canvas>
@@ -164,10 +166,10 @@
                     </div>
                 </div>
             </div>
-            <div style="float: right; width: 30%;">
+            @*<div style="float: right; width: 30%;">
                 <div style="height: 350px; border: 1px solid #e6e6e6; background-color: #fff;">
                     <div class="panel panel-default">
-                        <div class="panel-heading"><i class="fa fa-pie-chart fa-lg" style="padding-right: 5px;"></i>菜品分类统计</div>
+                        <div class="panel-heading"><i class="fa fa-pie-chart fa-lg" style="padding-right: 5px;"></i>菜品销售Top5</div>
                         <div class="panel-body" style="padding-top: 20px;">
                             <canvas id="leavechart" style="height: 160px; width: 100%;"></canvas>
                             <div style="text-align: center; padding-top: 20px;">
@@ -197,67 +199,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
-        @*<div class="rows" style="overflow: hidden;">
-            <div style="float: left; width: 34%; margin-right: 1%;">
-                <div style="height: 265px; border: 1px solid #e6e6e6; background-color: #fff;">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><i class="fa fa-thumbs-o-up fa-lg" style="padding-right: 5px;"></i>最新签约</div>
-                        <div class="panel-body">
-                            <ul>
-                                <li><a href="#">南京森鹿皮件服饰有限公司</a><span class="time">2016-07-21</span></li>
-                                <li><a href="#">曲靖市绿能燃气运输有限公司</a><span class="time">2016-07-20</span></li>
-                                <li><a href="#">青海航天信息有限公司</a><span class="time">2016-07-19</span></li>
-                                <li><a href="#">吉林省蔬菜花卉科学研究院</a><span class="time">2016-07-17</span></li>
-                                <li><a href="#">青海省广播电视信息网络股份有限公司</a><span class="time">2016-07-17</span></li>
-                                <li><a href="#">国营长空精密机械制造公司</a><span class="time">2016-07-13</span></li>
-                                <li><a href="#">广东友元国土信息工程有限公司</a><span class="time">2016-07-12</span></li>
-                                <li><a href="#">广东友元国土信息工程有限公司</a><span class="time">2016-07-12</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="float: left; width: 34%; margin-right: 1%;">
-                <div style="height: 265px; border: 1px solid #e6e6e6; background-color: #fff;">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><i class="fa fa-rss fa-lg" style="padding-right: 5px;"></i>通知公告</div>
-                        <div class="panel-body">
-                            <ul>
-                                <li><a href="#">【通知】新版员工守则，即日执行</a><span class="time">2016-07-21</span></li>
-                                <li><a href="#">【公告】OA办公使用指南</a><span class="time">2016-07-21</span></li>
-                                <li><a href="#">【公告】劳动节集体出游指南</a><span class="time">2016-07-21</span></li>
-                                <li><a href="#">【通知】2016年G20财长和央行行</a><span class="time">2016-07-21</span></li>
-                                <li><a href="#">【通知】2016年G20财长和央行行</a><span class="time">2016-07-21</span></li>
-                                <li><a href="#">【通知】品牌价值的最佳选择</a><span class="time">2016-07-21</span></li>
-                                <li><a href="#">【公告】采购商城全新升级自营业正品</a><span class="time">2016-07-21</span></li>
-                                <li><a href="#">【公告】采购商城全新升级自营业正品</a><span class="time">2016-07-21</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div style="float: right; width: 30%;">
-                <div style="height: 265px; border: 1px solid #e6e6e6; background-color: #fff;">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><i class="fa fa-send fa-lg" style="padding-right: 5px;"></i>企业文化</div>
-                        <div class="panel-body">
-                            <ul>
-                                <li><a href="#">创新企业党建思想政治工作</a><span class="time">2016-07-02</span></li>
-                                <li><a href="#">现代国有企业道德体系初构</a><span class="time">2016-06-18</span></li>
-                                <li><a href="#">国有企业文化问题根源及文化重塑任务分析</a><span class="time">2016-06-26</span></li>
-                                <li><a href="#">国有企业文化建设必须突出员工文化</a><span class="time">2016-04-20</span></li>
-                                <li><a href="#">加强企业公民建设 推进企业和谐发展</a><span class="time">2016-03-08</span></li>
-                                <li><a href="#">不断提升大庆精神 实现企业持续发展</a><span class="time">2016-02-22</span></li>
-                                <li><a href="#">科学发展作指导 人水和谐路更宽</a><span class="time">2016-02-15</span></li>
-                                <li><a href="#">科学发展作指导 人水和谐路更宽</a><span class="time">2016-02-15</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
     </div>
     <style>
         #copyrightcontent {
