@@ -80,7 +80,7 @@ namespace NFine.Application.MenuService
                 oblT_MEMBERSEntity.Cname = objT_MEMBERSEntity.Cname;
                 oblT_MEMBERSEntity.SortCode = objT_MEMBERSEntity.SortCode;
                 oblT_MEMBERSEntity.Description = objT_MEMBERSEntity.Description == null ? "暂无" : objT_MEMBERSEntity.Description;
-                oblT_MEMBERSEntity.Introduction = objT_MEMBERSEntity.Description;
+                oblT_MEMBERSEntity.Introduction = objT_MEMBERSEntity.Introduction == null ? "暂无" : objT_MEMBERSEntity.Introduction;
                 oblT_MEMBERSEntity.Gender = objT_MEMBERSEntity.Gender;
                 service.Update(oblT_MEMBERSEntity);
             }
@@ -89,7 +89,7 @@ namespace NFine.Application.MenuService
                 objT_MEMBERSEntity.DeletionStateCode = 0;
                 objT_MEMBERSEntity.Enabled = 0;
                 objT_MEMBERSEntity.Description = objT_MEMBERSEntity.Description==null?"暂无": objT_MEMBERSEntity.Description;
-                objT_MEMBERSEntity.Introduction = objT_MEMBERSEntity.Description;
+                objT_MEMBERSEntity.Introduction = objT_MEMBERSEntity.Introduction == null ? "暂无" : objT_MEMBERSEntity.Introduction;
                 objT_MEMBERSEntity.CreateUserId = 0;
                 objT_MEMBERSEntity.CreateBy = OperatorProvider.Provider.GetCurrent().UserName;
                 objT_MEMBERSEntity.ModifiedBy = OperatorProvider.Provider.GetCurrent().UserName;

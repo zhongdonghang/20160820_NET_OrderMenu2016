@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 
-<script>
+@*<script>
     $.reCreateDayReport = function (options) {
         var defaults = {
             prompt: "注：您确认要重新生成本店所有日报表吗，这将耗费一点时间？",
@@ -51,7 +51,7 @@
 
     }
 
-</script>
+</script>*@
 
 <script>
     $(function () {
@@ -97,12 +97,12 @@
         <div class="btn-group">
             <a class="btn btn-primary" onclick="$.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
         </div>
-        <div class="btn-group">
+        @*<div class="btn-group">
             <a id="NF-ReCreateAllReport" authorize="yes" class="btn btn-primary dropdown-text" onclick="btn_reCreate()"><i class="fa fa-plus"></i>重新生成所有日报表</a>
-        </div>
+        </div>*@
         <script>$('.toolbar').authorizeButton()</script>
     </div>
-    <div class="search">
+    @*<div class="search">
         <table>
             <tr>
                 <td>
@@ -115,7 +115,7 @@
                 </td>
             </tr>
         </table>
-    </div>
+    </div>*@
 </div>
 <div class="gridPanel">
     <table id="gridList"></table>
