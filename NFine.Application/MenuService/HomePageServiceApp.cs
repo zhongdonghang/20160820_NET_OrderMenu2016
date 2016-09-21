@@ -23,7 +23,7 @@ namespace NFine.Application.MenuService
                     " select count(OID) as 当天所有订单数 from T_ORDER where (OrderState = 1 or OrderState = 2)  " +
                     " and OrgID = " + OrgId + " " +
                     " and CONVERT(varchar(100), GETDATE(), 23)= CONVERT(varchar(100), CreateTime, 23) " +
-                    " select sum(Price1)当天总销售额 from T_ORDER_INFO where OrderNo in  " +
+                    " select sum(Price1*PNum)当天总销售额 from T_ORDER_INFO where OrderNo in  " +
                     " (select OrderNo from T_ORDER where (OrderState = 1 or OrderState = 2)  " +
                     " and OrgID = " + OrgId + " and CONVERT(varchar(100), GETDATE(), 23)= CONVERT(varchar(100), CreateTime, 23)) " +
                     " select sum(Price2) as 当天已收金额 from T_ORDER_CHECKOUT " +
