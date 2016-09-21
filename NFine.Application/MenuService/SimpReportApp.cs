@@ -1,5 +1,6 @@
 ﻿using NFine.Code;
 using NFine.Data.Extensions;
+using NFine.Domain._02_ViewModel.Rpt;
 using NFine.Domain._03_Entity.MenuBiz;
 using NFine.Domain._04_IRepository.MenuBiz;
 using NFine.Repository.MenuBiz;
@@ -21,6 +22,50 @@ namespace NFine.Application.MenuService
         private IT_ORDERRepository orderService = new T_ORDERRepository();
         private IT_ORDER_INFORepository orderInfoService = new T_ORDER_INFORepository();
         private IT_ORDER_CHECKOUTRepository checkOutInfoService = new T_ORDER_CHECKOUTRepository();
+
+        /// <summary>
+        /// 获取指定月份的每日营业额
+        /// </summary>
+        /// <param name="OrgId"></param>
+        /// <param name="Month"></param>
+        /// <returns></returns>
+        public RptCurrentSalesLineViewModel GetRptCurrentSalesLineViewModel(int OrgId,int Month)
+        {
+            RptCurrentSalesLineViewModel vm = new RptCurrentSalesLineViewModel();
+            string cacheKey = OrgId.ToString() + Month.ToString() + "RptCurrentSalesLineViewModel";
+            vm = CacheFactory.Cache().GetCache<RptCurrentSalesLineViewModel>(cacheKey);
+            if (vm == null)
+            {
+              
+                vm = new RptCurrentSalesLineViewModel();
+                vm.Month = Month;
+                string sql = "select  营业额,日 from Report_Day where 月 = " + Month + " and orgid = " + OrgId + "";
+                DataTable dt = DbHelper.QueryDataTable(sql);
+
+                int monthDays = 31;
+                vm.List = new List<RptSubDaysales>();
+                for (int i = 1; i <= monthDays; i++)
+                {
+                    RptSubDaysales sd = new RptSubDaysales();
+                    sd.Day = i;
+                    sd.Total = 0;
+                    vm.List.Add(sd);
+                }
+                foreach (RptSubDaysales item in vm.List)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        if (row[1].ToString() == item.Day.ToString())
+                        {
+                            item.Total = decimal.Parse(row[0].ToString());
+                        }
+                    }
+                }
+                CacheFactory.Cache().WriteCache<RptCurrentSalesLineViewModel>(vm, cacheKey);
+            }
+
+            return vm;
+        }
 
         /// <summary>
         /// 查询获得月报表
@@ -51,48 +96,6 @@ namespace NFine.Application.MenuService
             return service.FindList(expression, pagination);
         }
 
-        ///// <summary>
-        ///// 生成所有门店的所有日报表
-        ///// </summary>
-        //public void CreateDayReport(int OrgId)
-        //{
-        //    //先移除当前所有记录
-        //    service.Delete(t => t.OrgID == OrgId);
-            
-        //        string sql = "select CONVERT(varchar(10), CreateOn, 120 ) as CrDate , " +
-        //            " count(OrderNo) as 订单数量, " +
-        //            " sum(Price2) as 营业额, " +
-        //            " max(Price2) as 最高单额, " +
-        //            " min(Price2) as 最低单额, " +
-        //            " avg(Price2) as 平均单额 " +
-        //            " from[dbo].[T_ORDER_CHECKOUT] where OrgID = "+ OrgId + "  " +
-        //            "  group by  CONVERT(varchar(10), CreateOn, 120)";
-
-        //        DataTable dt = DbHelper.QueryDataTable(sql);
-
-        //    List<Report_DayEntity> list = new List<Report_DayEntity>();
-        //    foreach (DataRow  item in dt.Rows)
-        //    {
-        //        Report_DayEntity entity = new Report_DayEntity();
-        //        entity.订单数量 = int.Parse(item["订单数量"].ToString());
-        //        entity.营业额 = decimal.Parse(item["营业额"].ToString());
-        //        entity.最高单额 = decimal.Parse(item["最高单额"].ToString());
-        //        entity.最低单额 = decimal.Parse(item["最低单额"].ToString());
-        //        entity.平均单额 = decimal.Parse(item["平均单额"].ToString());
-        //        entity.OrgID = OrgId;
-        //        entity.CrDate = DateTime.Parse(item["CrDate"].ToString());
-        //        entity.年 = entity.CrDate.Year;
-        //        entity.月 = entity.CrDate.Month;
-        //        entity.日 = entity.CrDate.Day;
-        //        list.Add(entity);
-        //    }
-        //        service.Insert(list);
-            
-        //}
-
-        //public void CreateMonthReport(int OrgId)
-        //{
-
-        //}
+       
     }
 }
