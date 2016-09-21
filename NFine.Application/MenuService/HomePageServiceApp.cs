@@ -116,68 +116,68 @@ namespace NFine.Application.MenuService
                 vm.ObjHomePageTimesOrderCountViewModel.Hours22 = ds.Tables[10].Rows[0][0].ToString();
                 vm.ObjHomePageTimesOrderCountViewModel.Hours0 = ds.Tables[11].Rows[0][0].ToString();
 
-                sql = "select ProductCname, sum(PNum) as 数量 from [dbo].[T_ORDER_INFO] where "+
-                    " OrderNo like '"+OrgId+"%'  and "+
-                    " CONVERT(varchar(100), GETDATE(), 23) = CONVERT(varchar(100), CreateOn, 23) "+
-                    " group by ProductCname order by sum(PNum)desc";
-                ds.Tables.Clear();
-                ds = DbHelper.QueryDataSet(sql);
-                vm.ObjHomePageSalesTop5ProductViewModel = new HomePageSalesTop5ProductViewModel();
-                if (ds.Tables[0].Rows.Count>0)
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top1ProductName = ds.Tables[0].Rows[0][0].ToString();
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top1ProductCount = ds.Tables[0].Rows[0][1].ToString();
-                }
-                else
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top1ProductName = "暂无";
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top1ProductCount = "0";
-                }
+                //sql = "select ProductCname, sum(PNum) as 数量 from [dbo].[T_ORDER_INFO] where "+
+                //    " OrderNo like '"+OrgId+"%'  and "+
+                //    " CONVERT(varchar(100), GETDATE(), 23) = CONVERT(varchar(100), CreateOn, 23) "+
+                //    " group by ProductCname order by sum(PNum)desc";
+                //ds.Tables.Clear();
+                //ds = DbHelper.QueryDataSet(sql);
+                //vm.ObjHomePageSalesTop5ProductViewModel = new HomePageSalesTop5ProductViewModel();
+                //if (ds.Tables[0].Rows.Count>0)
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top1ProductName = ds.Tables[0].Rows[0][0].ToString();
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top1ProductCount = ds.Tables[0].Rows[0][1].ToString();
+                //}
+                //else
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top1ProductName = "暂无";
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top1ProductCount = "0";
+                //}
 
-                if (ds.Tables[0].Rows.Count > 1)
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top2ProductName = ds.Tables[0].Rows[1][0].ToString();
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top2ProductCount = ds.Tables[0].Rows[1][1].ToString();
-                }
-                else
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top2ProductName = "暂无";
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top2ProductCount = "0";
-                }
+                //if (ds.Tables[0].Rows.Count > 1)
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top2ProductName = ds.Tables[0].Rows[1][0].ToString();
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top2ProductCount = ds.Tables[0].Rows[1][1].ToString();
+                //}
+                //else
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top2ProductName = "暂无";
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top2ProductCount = "0";
+                //}
 
 
-                if (ds.Tables[0].Rows.Count > 2)
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top3ProductName = ds.Tables[0].Rows[2][0].ToString();
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top3ProductCount = ds.Tables[0].Rows[2][1].ToString();
-                }
-                else
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top3ProductName = "暂无";
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top3ProductCount = "0";
-                }
+                //if (ds.Tables[0].Rows.Count > 2)
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top3ProductName = ds.Tables[0].Rows[2][0].ToString();
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top3ProductCount = ds.Tables[0].Rows[2][1].ToString();
+                //}
+                //else
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top3ProductName = "暂无";
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top3ProductCount = "0";
+                //}
 
-                if (ds.Tables[0].Rows.Count > 3)
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top4ProductName = ds.Tables[0].Rows[3][0].ToString();
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top4ProductCount = ds.Tables[0].Rows[3][1].ToString();
-                }
-                else
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top4ProductName = "暂无";
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top4ProductCount = "0";
-                }
+                //if (ds.Tables[0].Rows.Count > 3)
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top4ProductName = ds.Tables[0].Rows[3][0].ToString();
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top4ProductCount = ds.Tables[0].Rows[3][1].ToString();
+                //}
+                //else
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top4ProductName = "暂无";
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top4ProductCount = "0";
+                //}
 
-                if (ds.Tables[0].Rows.Count > 4)
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top5ProductName = ds.Tables[0].Rows[4][0].ToString();
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top5ProductCount = ds.Tables[0].Rows[4][1].ToString();
-                }
-                else
-                {
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top5ProductName = "暂无";
-                    vm.ObjHomePageSalesTop5ProductViewModel.Top5ProductCount = "0";
-                }
+                //if (ds.Tables[0].Rows.Count > 4)
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top5ProductName = ds.Tables[0].Rows[4][0].ToString();
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top5ProductCount = ds.Tables[0].Rows[4][1].ToString();
+                //}
+                //else
+                //{
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top5ProductName = "暂无";
+                //    vm.ObjHomePageSalesTop5ProductViewModel.Top5ProductCount = "0";
+                //}
 
                 CacheFactory.Cache().WriteCache<HomeDefaultViewModel>(vm, OrgId + "DefaultViewModel");
             }
