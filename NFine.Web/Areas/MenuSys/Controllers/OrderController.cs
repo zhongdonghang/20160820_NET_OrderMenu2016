@@ -30,8 +30,6 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             ViewDataDictionary dic = new ViewDataDictionary(order);
             vr.ViewData = dic;
             return vr;
-            //string OID = Request.Params["OID"];
-            //return View("Print");
         }
 
         /// <summary>

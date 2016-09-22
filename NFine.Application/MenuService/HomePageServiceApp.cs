@@ -31,7 +31,7 @@ namespace NFine.Application.MenuService
                     " OrgID = " + OrgId + " and " +
                     " CONVERT(varchar(100), GETDATE(), 23) = CONVERT(varchar(100), CreateOn, 23) " +
                     " declare @orderSum money " +
-                    " select @orderSum = sum(Price1) from T_ORDER_INFO where OrderNo in  " +
+                    " select @orderSum = sum(Price1*PNum) from T_ORDER_INFO where OrderNo in  " +
                     " (select OrderNo from T_ORDER where (OrderState = 1 or OrderState = 2)  " +
                     " and OrgID = " + OrgId + " and " +
                     " CONVERT(varchar(100), GETDATE(), 23) = CONVERT(varchar(100), CreateTime, 23)) " +

@@ -24,6 +24,52 @@ namespace NFine.Application.MenuService
         private IT_ORDER_CHECKOUTRepository checkOutInfoService = new T_ORDER_CHECKOUTRepository();
 
         /// <summary>
+        /// 商品销售排行榜
+        /// </summary>
+        /// <param name="beginDate"></param>
+        /// <param name="endDate"></param>
+        /// <param name="OrgID"></param>
+        /// <returns></returns>
+        public RptTopSalesProductsViewModel GetRptTopSalesProductsViewModel(string beginDate, string endDate, int OrgID)
+        {
+            RptTopSalesProductsViewModel vm = new RptTopSalesProductsViewModel();
+            string cacheKey = OrgID.ToString() + beginDate + endDate + "RptTopSalesProductsViewModel";
+            vm = CacheFactory.Cache().GetCache<RptTopSalesProductsViewModel>(cacheKey);
+            if (vm == null)
+            {
+                vm = new RptTopSalesProductsViewModel();
+                string sql = "select  * from Report_ProductSaleDays where 销售日期>='" + beginDate + "' and 销售日期<='" + endDate + "'  and OrgID = 20 order by 销售商品数量 desc ";
+                DataTable dt = DbHelper.QueryDataTable(sql);
+                vm.RptTopSalesName = beginDate + "号到" + endDate + "号 Top 5 畅销商品排行";
+                vm.RptLastSalesName = beginDate + "-" + endDate + "Top 5 滞销商品排行";
+                vm.ProductsTopSales = new List<RptTopSalesProductItem>();
+                vm.ProductsLastSales = new List<RptTopSalesProductItem>();
+
+                for (int i = 0; i < 5; i++) //初始化为每个集合5个元素
+                {
+                    RptTopSalesProductItem it = new RptTopSalesProductItem();
+                    it.Price = 0;
+                    it.ProductName = "暂无";
+                    it.SaleCount = 0;
+
+                    vm.ProductsTopSales.Add(it);
+                    vm.ProductsLastSales.Add(it);
+                }
+
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (i == 5) break;
+                    vm.ProductsTopSales[i].ProductName = dt.Rows[i]["销售商品名称"].ToString();
+                    vm.ProductsTopSales[i].SaleCount = int.Parse(dt.Rows[i]["销售商品数量"].ToString());
+                    vm.ProductsTopSales[i].Price = decimal.Parse(dt.Rows[i]["商品单价"].ToString());
+                }
+
+                CacheFactory.Cache().WriteCache<RptTopSalesProductsViewModel>(vm, cacheKey);
+            }
+            return vm;
+        }
+
+        /// <summary>
         /// 获取指定月份的每日营业额
         /// </summary>
         /// <param name="OrgId"></param>

@@ -48,33 +48,27 @@
     function btn_pay()
     {
         var keyValue = $("#gridList").jqGridRowValue().OID;
-        $.modalOpen({
-            id: "Form",
-            title: "订单支付",
-            url: "/MenuSys/Order/Pay?keyValue=" + keyValue,
-            width: "700px",
-            height: "510px",
-            btn: null
-            //callBack: function (iframeId) {
-            //    top.frames[iframeId].submitForm();
-            //}
-        });
+        if (keyValue) {
+            $.modalOpen({
+                id: "Form",
+                title: "订单支付",
+                url: "/MenuSys/Order/Pay?keyValue=" + keyValue,
+                width: "700px",
+                height: "510px",
+                btn: null
+                //callBack: function (iframeId) {
+                //    top.frames[iframeId].submitForm();
+                //}
+            });
+        } else {
+            alert("请选择要操作的订单");
+        }
     }
 
     function btn_print() {
         var keyValue = $("#gridList").jqGridRowValue().OID;
         location.href = '/MenuSys/Order/Print?OID='+keyValue
-        //$.modalOpen({
-        //    id: "Form",
-        //    title: "订单支付",
-        //    url: "/MenuSys/Order/Pay?keyValue=" + keyValue,
-        //    width: "700px",
-        //    height: "510px",
-        //    btn: null
-        //    //callBack: function (iframeId) {
-        //    //    top.frames[iframeId].submitForm();
-        //    //}
-        //});
+
     }
 
     function btn_edit() {

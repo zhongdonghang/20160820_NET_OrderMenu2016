@@ -1,0 +1,106 @@
+﻿@model NFine.Domain._02_ViewModel.Rpt.RptTopSalesProductsViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>饼图</title>
+
+    <link href="~/Content/css/framework-font.css" rel="stylesheet" />
+    <link href="~/Content/css/framework-ui.css" rel="stylesheet" />
+    <link href="~/Content/js/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+
+
+    <link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/highcharts/highcharts.js"></script>
+    <script>
+
+        $(function () {
+
+            $("#btn_search").click(function () {
+                if ($("#PCategory").val() != "")
+                {
+                    //alert($("#PCategory").val());
+                    location.href = '/MenuSys/RptTopSalesProducts/CreateRptPage?m=' + $("#PCategory").val();
+                }
+            });
+
+        });
+
+        var chart;
+        $(document).ready(function () {
+
+            // Build the chart
+            $('#container').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false
+                },
+                title: {
+                    text: '@Model.RptTopSalesName'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            connectorColor: '#000000',
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '份额：',
+                    data: [
+                        ['@Model.ProductsTopSales[1].ProductName', @Model.ProductsTopSales[1].SaleCount],
+                        ['@Model.ProductsTopSales[2].ProductName', @Model.ProductsTopSales[2].SaleCount],
+                        {
+                            name: '@Model.ProductsTopSales[0].ProductName',
+                            y: @Model.ProductsTopSales[0].SaleCount,
+                            sliced: true,
+                            selected: true
+                        },
+                        ['@Model.ProductsTopSales[3].ProductName', @Model.ProductsTopSales[3].SaleCount],
+                        ['@Model.ProductsTopSales[4].ProductName', @Model.ProductsTopSales[4].SaleCount]
+                    ]
+                }]
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div class="topPanel">
+        <div class="search">
+            <table>
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <select id="PCategory" name="PCategory" class="form-control required">
+                                <option value="0">昨天</option>
+                                <option value="1">最近7天</option>
+                                <option value="2">最近30天</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <p></p>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>

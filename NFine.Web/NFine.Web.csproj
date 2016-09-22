@@ -134,6 +134,7 @@
     <Compile Include="Areas\MenuSys\Controllers\OrderController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\ProductController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\ProductGroupReportController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\RptTopSalesProductsController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\SeatController.cs" />
     <Compile Include="Areas\MenuSys\MenuSysAreaRegistration.cs" />
     <Compile Include="Areas\ReportManage\Controllers\EchartsController.cs" />
@@ -752,6 +753,7 @@
     <Content Include="Areas\MenuSys\Views\Order\PaySuccess.cshtml" />
     <Content Include="Areas\MenuSys\Views\Order\Print.cshtml" />
     <Content Include="Areas\MenuSys\Views\MonthSalesLine\Index.cshtml" />
+    <Content Include="Areas\MenuSys\Views\RptTopSalesProducts\RptPage.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
