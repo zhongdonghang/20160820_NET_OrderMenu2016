@@ -54,6 +54,8 @@
     <Compile Include="02 ViewModel\HomePageTimesOrderCountViewModel.cs" />
     <Compile Include="02 ViewModel\HomePageTopViewModel.cs" />
     <Compile Include="02 ViewModel\Rpt\ProductGroupReportViewModel.cs" />
+    <Compile Include="02 ViewModel\Rpt\Report_CategoryDaySalesViewModel.cs" />
+    <Compile Include="02 ViewModel\Rpt\Report_ProductStructureViewModel.cs" />
     <Compile Include="02 ViewModel\Rpt\RptCurrentSalesLineViewModel.cs" />
     <Compile Include="02 ViewModel\Rpt\RptTopSalesProductsViewModel.cs" />
     <Compile Include="02 ViewModel\SimpleOrder.cs" />

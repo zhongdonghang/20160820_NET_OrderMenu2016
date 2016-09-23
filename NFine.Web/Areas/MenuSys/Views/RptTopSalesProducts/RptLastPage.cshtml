@@ -22,7 +22,7 @@
             $("#btn_search").click(function () {
                 if ($("#PCategory").val() != "")
                 {
-                    location.href = '/MenuSys/RptTopSalesProducts/CreateRptPage?m=' + $("#PCategory").val();
+                    location.href = '/MenuSys/RptTopSalesProducts/CreateRptLastPage?m=' + $("#PCategory").val();
                 }
             });
 
@@ -39,7 +39,7 @@
                     plotShadow: false
                 },
                 title: {
-                    text: '@Model.RptTopSalesName'
+                    text: '@Model.RptLastSalesName'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -61,16 +61,16 @@
                     type: 'pie',
                     name: '份额：',
                     data: [
-                        ['@Model.ProductsTopSales[1].ProductName', @Model.ProductsTopSales[1].SaleCount],
-                        ['@Model.ProductsTopSales[2].ProductName', @Model.ProductsTopSales[2].SaleCount],
+                        ['@Model.ProductsLastSales[1].ProductName', @Model.ProductsLastSales[1].SaleCount],
+                        ['@Model.ProductsLastSales[2].ProductName', @Model.ProductsLastSales[2].SaleCount],
                         {
-                            name: '@Model.ProductsTopSales[0].ProductName',
-                            y: @Model.ProductsTopSales[0].SaleCount,
+                            name: '@Model.ProductsLastSales[0].ProductName',
+                            y: @Model.ProductsLastSales[0].SaleCount,
                             sliced: true,
                             selected: true
                         },
-                        ['@Model.ProductsTopSales[3].ProductName', @Model.ProductsTopSales[3].SaleCount],
-                        ['@Model.ProductsTopSales[4].ProductName', @Model.ProductsTopSales[4].SaleCount]
+                        ['@Model.ProductsLastSales[3].ProductName', @Model.ProductsLastSales[3].SaleCount],
+                        ['@Model.ProductsLastSales[4].ProductName', @Model.ProductsLastSales[4].SaleCount]
                     ]
                 }]
             });

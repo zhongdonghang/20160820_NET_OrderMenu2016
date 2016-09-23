@@ -1,0 +1,124 @@
+﻿@model NFine.Domain._02_ViewModel.Rpt.Report_ProductStructureViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>商品结构报表</title>
+    <link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/highcharts/highcharts.js"></script>
+    <script>
+        $(function () {
+            var CategoriesString = '@Model.CategoriesString';
+            var strs = new Array();
+            strs = CategoriesString.split(",");
+
+            var CategoryCountString = '@Model.CategoryCountString';
+            var CategoryCountStringArr = new Array();
+            var CategoryCountStringArr = CategoryCountString.split(",");
+            var intCategoryCountStringArr = new Array();
+            for (var i = 0; i < CategoryCountStringArr.length; i++) {
+                intCategoryCountStringArr[i] = parseInt(CategoryCountStringArr[i]);
+            }
+
+            var AvgPriceString = '@Model.AvgPriceString';
+            var AvgPriceStringArr = new Array();
+            var AvgPriceStringArr = AvgPriceString.split(",");
+            var intAvgPriceStringArr = new Array();
+            for (var i = 0; i < AvgPriceStringArr.length; i++) {
+                intAvgPriceStringArr[i] = parseFloat(AvgPriceStringArr[i]);
+            }
+
+            var MaxPriceString = '@Model.MaxPriceString';
+            var MaxPriceStringArr = new Array();
+            var MaxPriceStringArr = MaxPriceString.split(",");
+            var intMaxPriceStringArr = new Array();
+            for (var i = 0; i < MaxPriceStringArr.length; i++) {
+                intMaxPriceStringArr[i] = parseFloat(MaxPriceStringArr[i]);
+            }
+
+            var MinPriceString = '@Model.MinPriceString';
+            var MinPriceStringArr = new Array();
+            var MinPriceStringArr = MinPriceString.split(",");
+            var intMinPriceStringArr = new Array();
+            for (var i = 0; i < MinPriceStringArr.length; i++) {
+                intMinPriceStringArr[i] = parseFloat(MinPriceStringArr[i]);
+            }
+
+            $('#container').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '商品结构报表'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: strs,
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: '元'
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 100,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: '商品数量',
+                    data: intCategoryCountStringArr
+                }, {
+                    name: '均价',
+                    data: intAvgPriceStringArr
+                }, {
+                    name: '最高价',
+                    data: intMaxPriceStringArr
+                },
+                 {
+                     name: '最低价',
+                     data: intMinPriceStringArr
+                 }
+
+                ]
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>
+

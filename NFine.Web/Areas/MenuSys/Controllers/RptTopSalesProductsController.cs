@@ -23,6 +23,43 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             return View();
         }
 
+        public ViewResult CreateRptLastPage()
+        {
+            ViewResult vr = new ViewResult();
+            vr.ViewName = "RptLastPage";
+            string beginDate = "";
+            string endDate = "";
+            if (Request["m"] == null)
+            {
+                beginDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                endDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                string reqM = Request["m"].ToString();
+                if (reqM == "0") //前一天
+                {
+                    beginDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                    endDate = DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd");
+                }
+                else if (reqM == "1") //最近7天
+                {
+                    beginDate = DateTime.Now.AddDays(-7).ToString("yyyy-MM-dd");
+                    endDate = DateTime.Now.ToString("yyyy-MM-dd");
+                }
+                else if (reqM == "2") //最近一个月
+                {
+                    beginDate = DateTime.Now.AddDays(-30).ToString("yyyy-MM-dd");
+                    endDate = DateTime.Now.ToString("yyyy-MM-dd");
+                }
+            }
+            int OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
+            RptTopSalesProductsViewModel vm = objSimpReportApp.GetRptLastSalesProductsViewModel(beginDate, endDate, OrgID);
+            ViewDataDictionary dic = new ViewDataDictionary(vm);
+            vr.ViewData = dic;
+            return vr;
+        }
+
         public ViewResult CreateRptPage()
         {
             ViewResult vr = new ViewResult();

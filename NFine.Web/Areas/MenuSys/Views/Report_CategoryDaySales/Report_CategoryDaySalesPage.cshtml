@@ -1,0 +1,141 @@
+﻿@model NFine.Domain._02_ViewModel.Rpt.Report_CategoryDaySalesViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>条形图</title>
+
+    <link href="~/Content/css/framework-font.css" rel="stylesheet" />
+    <link href="~/Content/css/framework-ui.css" rel="stylesheet" />
+    <link href="~/Content/js/bootstrap/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery/jquery-2.1.1.min.js"></script>
+    <script src="~/Content/js/highcharts/highcharts.js"></script>
+    <script>
+
+        $(function () {
+
+            $("#btn_search").click(function () {
+                if ($("#PCategory").val() != "") {
+                    location.href = '/MenuSys/Report_CategoryDaySales/CreateRptLastPage?m=' + $("#PCategory").val();
+                }
+            });
+
+        });
+
+        $(function () {
+
+            var CategoriesString = '@Model.CategoriesString';
+            var strs = new Array(); 
+            strs = CategoriesString.split(",");
+
+            var saleCountString = '@Model.SalesCountString';
+            var saleCountArr = new Array();
+            var saleCountArr = saleCountString.split(",");
+            var intSaleCountArr = new Array();
+            for (var i = 0; i < saleCountArr.length; i++) {
+                intSaleCountArr[i] = parseInt(saleCountArr[i]);
+            }
+
+            var saleTotalString = '@Model.SaleTotalString';
+            var saleTotalArr = new Array();
+            var saleTotalArr = saleTotalString.split(",");
+            var intsaleTotalArr = new Array();
+            for (var i = 0; i < saleTotalArr.length; i++) {
+                intsaleTotalArr[i] = parseFloat(saleTotalArr[i]);
+            }
+            $('#container').highcharts({
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: '@Model.Title'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: strs,
+                    title: {
+                        text: null
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: '',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' '
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 100,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [
+                    {
+                        name: '销售额',
+                        data:  intsaleTotalArr
+                    },
+                     {
+                         name: '销售量',
+                         data: intSaleCountArr
+                     }
+                    
+                ]
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+    <div class="topPanel">
+        <div class="search">
+            <table>
+                <tr>
+                    <td>
+                        <div class="input-group">
+                            <select id="PCategory" name="PCategory" class="form-control required">
+                                <option value="0">昨天</option>
+                                <option value="1">最近7天</option>
+                                <option value="2">最近30天</option>
+                            </select>
+                            <span class="input-group-btn">
+                                <button id="btn_search" type="button" class="btn  btn-primary"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <p></p>
+
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>
