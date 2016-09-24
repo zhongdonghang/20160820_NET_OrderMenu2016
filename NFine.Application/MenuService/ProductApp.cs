@@ -157,6 +157,7 @@ namespace NFine.Application.MenuService
                 oldT_PRODUCTEntity.Price2 = objT_PRODUCTEntity.Price2;
                 oldT_PRODUCTEntity.SortCode = objT_PRODUCTEntity.SortCode;
                 oldT_PRODUCTEntity.PContent = objT_PRODUCTEntity.PContent;
+                oldT_PRODUCTEntity.Description = objCategoryservice.FindEntity(objT_PRODUCTEntity.PCategory).CName;
                 service.Update(oldT_PRODUCTEntity);
             }
             else
