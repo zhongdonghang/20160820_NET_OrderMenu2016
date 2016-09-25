@@ -1,0 +1,99 @@
+﻿@model NFine.Domain.Entity.SystemManage.OrganizeEntity
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+
+<script>
+    $(function () {
+        initControl();
+    });
+    function initControl() {
+        var MemberNum = '@Model.MemberNum'; // 10人以下 10-30人  30人以上
+        if (MemberNum == '10人以下') {
+            $("#MemberNum option[value='10人以下']").attr("selected", true);
+        }
+        else if (MemberNum == '10-30人') {
+            $("#MemberNum option[value='10-30人']").attr("selected", true);
+        }
+        else if (MemberNum == '30人以上') {
+            $("#MemberNum option[value='30人以上']").attr("selected", true);
+        }
+    }
+
+    function submitForm() {
+
+        $.submitForm({
+            url: " /MenuSys/OrgSetting/SubmitForm?F_Id=" + '@Model.F_Id',
+            param: $("#form1").formSerialize(),
+            success: function () {
+                //$.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+<form id="form1">
+    <div class="wrapper">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#a" data-toggle="tab">基本信息</a></li>
+        </ul>
+        <div class="tab-content" style="padding-top: 5px;">
+            <div id="a" class="tab-pane active" style="padding: 15px;">
+                <ul class="pop-list">
+                    <li>
+                        <label>门店名字</label>
+                        <input type="text" id="F_FullName" name="F_FullName" class="form-control" value="@Model.F_FullName" />
+                    </li>
+                    <li>
+                        <label>固定电话</label>
+                        <input type="text" id="F_TelePhone" name="F_TelePhone" class="form-control" value="@Model.F_TelePhone" />
+                    </li>
+                    <li>
+                        <label>移动电话</label>
+                        <input type="text" id="F_MobilePhone" name="F_MobilePhone" class="form-control" value="@Model.F_MobilePhone" />
+                    </li>
+                    <li>
+                        <label>联系微信号</label>
+                        <input id="F_WeChat" name="F_WeChat" type="text" value="@Model.F_WeChat" class="form-control"  />
+                    </li>
+                    <li>
+                        <label>传真号</label>
+                        <input type="text" id="F_Fax" name="F_Fax" class="form-control required" value="@Model.F_Fax" />
+                    </li>
+                    <li>
+                        <label>邮箱</label>
+                        <input type="text" id="F_Email" name="F_Email" class="form-control" value="@Model.F_Email" />
+                    </li>
+                    <li>
+                        <label>地址</label>
+                        <input type="text" id="F_Address" name="F_Address" class="form-control" value="@Model.F_Address" />
+                    </li>
+                    <li>
+                        <label>规模</label>
+                        <select id="MemberNum" name="MemberNum" class="form-control required">
+                            <option value="10人以下">10人以下</option>
+                            <option value="10-30人">10-30人</option>
+                            <option value="50人以上">30人以上</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label>台位数</label>
+                        <input type="text" id="SeatNum" name="SeatNum" class="form-control" value="@Model.SeatNum" />
+                    </li>
+                    <li>
+                        <label>备注</label>
+                        <textarea style="width:600px;height:70px" id="F_Description" name="F_Description" class="form-control">@Model.F_Description</textarea>
+                    </li>
+                    <li>
+                        <div style="padding-left: 115px;">
+                            <a class="btn btn-primary" onclick="submitForm()"><i class="fa fa-save" style="margin-right:5px;"></i>保存更改</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>

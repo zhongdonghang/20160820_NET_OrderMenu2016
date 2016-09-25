@@ -19,6 +19,23 @@ namespace NFine.Application.SystemManage
 
         private UserLogOnApp userLogOnApp = new UserLogOnApp();
 
+        /// <summary>
+        /// 钟东航 修改个人信息
+        /// </summary>
+        public void Modify(UserEntity newUserEntity)
+        {
+            UserEntity oldUserEntity = service.FindEntity(newUserEntity.F_Id);
+            oldUserEntity.F_RealName = newUserEntity.F_RealName;
+            oldUserEntity.F_Gender = newUserEntity.F_Gender;
+            oldUserEntity.F_Birthday = newUserEntity.F_Birthday;
+            oldUserEntity.F_MobilePhone = newUserEntity.F_MobilePhone;
+            oldUserEntity.F_Email = newUserEntity.F_Email;
+            oldUserEntity.F_WeChat = newUserEntity.F_WeChat;
+            service.Update(oldUserEntity);
+        }
+
+
+
         public List<UserEntity> GetList(Pagination pagination, string keyword)
         {
             var expression = ExtLinq.True<UserEntity>();

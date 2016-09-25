@@ -125,6 +125,7 @@
     <Compile Include="Areas\ExampleManage\Controllers\SendMessagesController.cs" />
     <Compile Include="Areas\ExampleManage\Controllers\SignetController.cs" />
     <Compile Include="Areas\ExampleManage\ExampleManageAreaRegistration.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\BossSettingController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\CashierController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\CategoryController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\DayReportController.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Areas\MenuSys\Controllers\MonthReportController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\MonthSalesLineController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\OrderController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\OrgSettingController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\ProductController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\ProductGroupReportController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\Report_CategoryDaySalesController.cs" />
@@ -758,6 +760,8 @@
     <Content Include="Areas\MenuSys\Views\RptTopSalesProducts\RptLastPage.cshtml" />
     <Content Include="Areas\MenuSys\Views\Report_CategoryDaySales\Report_CategoryDaySalesPage.cshtml" />
     <Content Include="Areas\MenuSys\Views\ProductGroupReport\Report_CategoryDaySalesPage.cshtml" />
+    <Content Include="Areas\MenuSys\Views\BossSetting\Setting.cshtml" />
+    <Content Include="Areas\MenuSys\Views\OrgSetting\Setting.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>

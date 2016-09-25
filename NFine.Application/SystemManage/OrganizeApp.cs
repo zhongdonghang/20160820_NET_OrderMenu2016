@@ -17,6 +17,28 @@ namespace NFine.Application.SystemManage
     {
         private IOrganizeRepository service = new OrganizeRepository();
 
+        public void Modify(OrganizeEntity newOrganizeEntity)
+        {
+            OrganizeEntity oldObj = service.FindEntity(newOrganizeEntity.F_Id);
+            oldObj.F_FullName = newOrganizeEntity.F_FullName;
+            oldObj.F_ShortName = newOrganizeEntity.F_FullName;
+            oldObj.F_TelePhone = newOrganizeEntity.F_TelePhone;
+            oldObj.F_MobilePhone = newOrganizeEntity.F_MobilePhone;
+            oldObj.F_WeChat = newOrganizeEntity.F_WeChat;
+            oldObj.F_Fax = newOrganizeEntity.F_Fax;
+            oldObj.F_Email = newOrganizeEntity.F_Email;
+            oldObj.F_Address = newOrganizeEntity.F_Address;
+            oldObj.MemberNum = newOrganizeEntity.MemberNum;
+            oldObj.SeatNum = newOrganizeEntity.SeatNum;
+            oldObj.F_Description = newOrganizeEntity.F_Description;
+            service.Update(oldObj);
+        }
+
+        public OrganizeEntity GetByOrgNo(int OrgNo)
+        {
+            return service.IQueryable().Where<OrganizeEntity>(t => t.OrgNo == OrgNo).First();
+        }
+
         public List<OrganizeEntity> GetList()
         {
             return service.IQueryable().OrderBy(t => t.F_CreatorTime).ToList();

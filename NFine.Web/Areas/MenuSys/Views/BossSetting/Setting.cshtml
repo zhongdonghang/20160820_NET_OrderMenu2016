@@ -1,0 +1,86 @@
+﻿@model NFine.Domain.Entity.SystemManage.UserEntity
+
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<script>
+    $(function () {
+        initControl();
+        
+
+    });
+    function initControl() {
+        var sex = '@Model.F_Gender';
+        if (sex == 'True') {
+            $("#F_Gender option[value='True']").attr("selected", true);
+        } else {
+            $("#F_Gender option[value='False']").attr("selected", true);
+        }
+    }
+
+    function submitForm() {
+
+       // alert($("#form1").formSerialize());
+       
+        $.submitForm({
+            url: "/MenuSys/BossSetting/SubmitForm?F_Id="+'@Model.F_Id',
+            param: $("#form1").formSerialize(),
+            success: function () {
+                //$.currentWindow().$("#gridList").trigger("reloadGrid");
+            }
+        })
+    }
+
+</script>
+<form id="form1">
+    <div class="wrapper">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#a" data-toggle="tab">基本信息</a></li>
+        </ul>
+        <div class="tab-content" style="padding-top: 5px;">
+            <div id="a" class="tab-pane active" style="padding: 15px;">
+                <ul class="pop-list">
+                    <li>
+                        <label>账户</label>
+                        <input type="text" id="F_Account" name="F_Account" readonly="readonly" class="form-control" value="@Model.F_Account" />
+                    </li>
+                    <li>
+                        <label>姓名</label>
+                        <input type="text" id="F_RealName" name="F_RealName" class="form-control" value="@Model.F_RealName" />
+                    </li>
+                    <li>
+                        <label>性别</label>
+                        <select id="F_Gender" name="F_Gender" class="form-control required">
+                            <option value="True">男</option>
+                            <option value="False">女</option>
+                        </select>
+                        @*<input type="text" class="form-control" value="@Model.F_Gender" />*@
+                    </li>
+                    <li>
+                        <label>生日</label>
+                        <input id="F_Birthday" name="F_Birthday" type="text" value="@Model.F_Birthday" class="form-control input-wdatepicker" onfocus="WdatePicker()" />
+                    </li>
+                    <li>
+                        <label>联系电话</label>
+                        <input type="text" id="F_MobilePhone" name="F_MobilePhone" class="form-control required" value="@Model.F_MobilePhone" />
+                    </li>
+                    <li>
+                        <label>邮箱</label>
+                        <input type="text" id="F_Email" name="F_Email" class="form-control" value="@Model.F_Email" />
+                    </li>
+                    <li>
+                        <label>微信号</label>
+                        <input type="text" id="F_WeChat" name="F_WeChat" class="form-control" value="@Model.F_WeChat" />
+                    </li>
+                    <li>
+                        <div style="padding-left: 115px;">
+                            <a class="btn btn-primary" onclick="submitForm()"><i class="fa fa-save" style="margin-right:5px;"></i>保存更改</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </form>
