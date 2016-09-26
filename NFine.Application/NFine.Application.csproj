@@ -53,6 +53,7 @@
     <Compile Include="MenuService\readJSON.cs" />
     <Compile Include="MenuService\SeatApp.cs" />
     <Compile Include="MenuService\SimpReportApp.cs" />
+    <Compile Include="MenuService\UserInfoApp.cs" />
     <Compile Include="PageObject.cs" />
     <Compile Include="ResultObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

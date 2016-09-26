@@ -53,6 +53,7 @@
     <Compile Include="02 ViewModel\HomePageSalesTop5ProductViewModel.cs" />
     <Compile Include="02 ViewModel\HomePageTimesOrderCountViewModel.cs" />
     <Compile Include="02 ViewModel\HomePageTopViewModel.cs" />
+    <Compile Include="02 ViewModel\ModifyPasswordViewModel.cs" />
     <Compile Include="02 ViewModel\Rpt\ProductGroupReportViewModel.cs" />
     <Compile Include="02 ViewModel\Rpt\Report_CategoryDaySalesViewModel.cs" />
     <Compile Include="02 ViewModel\Rpt\Report_ProductStructureViewModel.cs" />

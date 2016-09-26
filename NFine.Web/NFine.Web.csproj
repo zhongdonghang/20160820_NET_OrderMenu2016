@@ -130,6 +130,7 @@
     <Compile Include="Areas\MenuSys\Controllers\CategoryController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\DayReportController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\MemBerController.cs" />
+    <Compile Include="Areas\MenuSys\Controllers\ModifyPasswordController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\MonthReportController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\MonthSalesLineController.cs" />
     <Compile Include="Areas\MenuSys\Controllers\OrderController.cs" />
@@ -762,6 +763,7 @@
     <Content Include="Areas\MenuSys\Views\ProductGroupReport\Report_CategoryDaySalesPage.cshtml" />
     <Content Include="Areas\MenuSys\Views\BossSetting\Setting.cshtml" />
     <Content Include="Areas\MenuSys\Views\OrgSetting\Setting.cshtml" />
+    <Content Include="Areas\MenuSys\Views\ModifyPassword\Setting.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
