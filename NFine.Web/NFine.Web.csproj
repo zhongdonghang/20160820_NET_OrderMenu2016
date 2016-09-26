@@ -764,6 +764,7 @@
     <Content Include="Areas\MenuSys\Views\BossSetting\Setting.cshtml" />
     <Content Include="Areas\MenuSys\Views\OrgSetting\Setting.cshtml" />
     <Content Include="Areas\MenuSys\Views\ModifyPassword\Setting.cshtml" />
+    <Content Include="lib\uploadify.zip" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
   </ItemGroup>
   <PropertyGroup>
