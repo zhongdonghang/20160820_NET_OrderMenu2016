@@ -30,40 +30,26 @@ namespace NFine.Web.Areas.MenuSys.Controllers
         }
 
 
-        public ActionResult UploadProgressImage(HttpPostedFileBase file)
+        public ActionResult UploadProgressImage(HttpPostedFileBase Filedata)// HttpPostedFileBase Filedata
         {
-            string productOID = Request.Params["txtOID"].ToString();
-            if (string.IsNullOrEmpty(productOID))
+
+            SYS_FILESEntity fileEntity = new SYS_FILESEntity();
+            string name = Common.CreateNo();
+            fileEntity.FileSize = Filedata.ContentLength;
+            if (Filedata.ContentType == "image/jpeg")
             {
-                return Error("缺失的商品编号，请重新打开上传");
-            }
-            else if (file == null)
-            {
-                return Error("请选择一张商品图片");
-            }
-            else if (file.ContentType != "image/jpeg" && file.ContentType != "image/png")
-            {
-                return Error("只能上传jpg或者png格式的图片");
+                fileEntity.FileName = name + ".jpg";
+                fileEntity.FilePath = "/uploadFiles/" + fileEntity.FileName + ".jpg";
             }
             else
             {
-                SYS_FILESEntity fileEntity = new SYS_FILESEntity();
-                string name = Common.CreateNo();
-                fileEntity.FileSize = file.ContentLength;
-                if (file.ContentType == "image/jpeg")
-                {
-                    fileEntity.FileName = name + ".jpg";
-                    fileEntity.FilePath = "/uploadFiles/" + fileEntity.FileName + ".jpg";
-                }
-                else
-                {
-                    fileEntity.FileName = name + ".png";
-                    fileEntity.FilePath = "/uploadFiles/" + fileEntity.FileName + ".png";
-                }
-                file.SaveAs(Server.MapPath("~/uploadFiles/"+ fileEntity.FileName));
-                objProductApp.SettingImageForProduct(fileEntity, productOID);
+                fileEntity.FileName = name + ".png";
+                fileEntity.FilePath = "/uploadFiles/" + fileEntity.FileName + ".png";
             }
-            return Success("上传成功");
+            Filedata.SaveAs(Server.MapPath("~/uploadFiles/" + fileEntity.FileName));
+            //    objProductApp.SettingImageForProduct(fileEntity, productOID);
+
+            return Success(fileEntity.FileName);
         }
 
         [HttpPost]
@@ -84,14 +70,41 @@ namespace NFine.Web.Areas.MenuSys.Controllers
             return Content(data.ToJson());
         }
 
-        [HttpPost]
-        [HandlerAjaxOnly]
-        [ValidateAntiForgeryToken]
+        //[HttpPost]
+        //[HandlerAjaxOnly]
+        //[ValidateAntiForgeryToken]
         public ActionResult SubmitForm(T_PRODUCTEntity objT_PRODUCTEntity, string keyValue)
         {
-            objT_PRODUCTEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
-            objProductApp.SubmitForm(objT_PRODUCTEntity,keyValue);
-            return Success("操作成功。");
+            string imagePath = Request["pImagePath"].ToString();
+            if (imagePath == "empty")
+            {
+                objT_PRODUCTEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
+                objProductApp.SubmitForm(objT_PRODUCTEntity, keyValue, null);
+            }
+            else
+            {
+                string imageName = imagePath.Substring(imagePath.LastIndexOf("/") + 1);
+                SYS_FILESEntity fileEntity = new SYS_FILESEntity();
+                fileEntity.FileName = imageName;
+                fileEntity.FilePath = "/uploadFiles/" + imageName; //201607241050101242.jpg
+                fileEntity.FileSize = 0;
+                fileEntity.ReadCount = 0;
+                fileEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
+                fileEntity.Category = 0;
+                fileEntity.DeletionStateCode = 0;
+                fileEntity.Enabled = 0;
+                fileEntity.SortCode = 0;
+                fileEntity.Description = "--";
+                fileEntity.CreateOn = DateTime.Now;
+                fileEntity.CreateUserId = 0;
+                fileEntity.CreateBy = OperatorProvider.Provider.GetCurrent().UserName;
+                fileEntity.ModifiedOn = DateTime.Now;
+                fileEntity.ModifiedUserId = 0;
+                fileEntity.ModifiedBy = OperatorProvider.Provider.GetCurrent().UserName;
+                objT_PRODUCTEntity.OrgID = OperatorProvider.Provider.GetCurrent().OrgId;
+                objProductApp.SubmitForm(objT_PRODUCTEntity, keyValue, fileEntity);
+            }
+            return Success("操作成功");
         }
 
         [HttpGet]

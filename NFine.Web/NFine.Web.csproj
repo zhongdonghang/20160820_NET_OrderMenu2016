@@ -483,6 +483,13 @@
     <Content Include="uploadFiles\201608271424201498.jpg" />
     <Content Include="uploadFiles\201608271425023975.jpg" />
     <Content Include="uploadFiles\moren.jpg" />
+    <Content Include="uploadify\Change Log.txt" />
+    <Content Include="uploadify\jquery.uploadify.js" />
+    <Content Include="uploadify\jquery.uploadify.min.js" />
+    <Content Include="uploadify\license.txt" />
+    <Content Include="uploadify\uploadify-cancel.png" />
+    <Content Include="uploadify\uploadify.css" />
+    <Content Include="uploadify\uploadify.swf" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -766,6 +773,9 @@
     <Content Include="Areas\MenuSys\Views\ModifyPassword\Setting.cshtml" />
     <Content Include="lib\uploadify.zip" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
+    <Content Include="uploadify\check-exists.php" />
+    <Content Include="uploadify\index.php" />
+    <Content Include="uploadify\uploadify.php" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
