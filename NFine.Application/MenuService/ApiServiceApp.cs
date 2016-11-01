@@ -773,7 +773,7 @@ namespace NFine.Application.MenuService
                     addOrg.F_Fax = "0";
                     addOrg.F_Email = "@";
                     addOrg.F_AreaId = "450000";
-                    addOrg.F_Address = "广西";
+                    addOrg.F_Address = "China";
                     addOrg.F_AllowEdit = true;
                     addOrg.F_AllowDelete = true;
                     addOrg.F_SortCode += orgDllService.IQueryable().Max(x => x.F_SortCode);
@@ -820,6 +820,10 @@ namespace NFine.Application.MenuService
                         ret.Msg = "操作成功";
                         ret.ResultCode = "200";
                         ret.t = vm;
+
+                        //发送短信通知
+                        SMSTools.Send(System.Configuration.ConfigurationManager.AppSettings["adminMobile"].ToString(), "有新用户注册，账户名为"+ loginName + "，请关注并指导如何使用我们产品！【点菜了】");
+                        SMSTools.Send(loginName, "欢迎您注册使用点菜了智能点菜app，请详细查看app首页的使用说明，可以通过添加微信duncansailing获得免费技术指导。【点菜了】");
                     }
                 }
             }
