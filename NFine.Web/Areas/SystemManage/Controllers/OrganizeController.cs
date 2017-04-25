@@ -102,5 +102,15 @@ namespace NFine.Web.Areas.SystemManage.Controllers
             organizeApp.DeleteForm(keyValue);
             return Success("删除成功。");
         }
+
+
+        /// <summary>
+        /// 短信发送，跳转到短信发送页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SendFixSMS()
+        {
+            return View("SendSMS");
+        }
     }
 }

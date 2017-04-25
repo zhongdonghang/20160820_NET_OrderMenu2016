@@ -7,7 +7,8 @@ using System.Web.Routing;
 
 namespace NFine.Web
 {
-    public class RouteConfig
+      
+    public class RouteConfig 
     {
         public static void RegisterRoutes(RouteCollection routes)
         {

@@ -823,7 +823,7 @@ namespace NFine.Application.MenuService
 
                         //发送短信通知
                         SMSTools.Send(System.Configuration.ConfigurationManager.AppSettings["adminMobile"].ToString(), "有新用户注册，账户名为"+ loginName + "，请关注并指导如何使用我们产品！【点菜了】");
-                        SMSTools.Send(loginName, "欢迎您注册使用点菜了智能点菜app，请详细查看app首页的使用说明，可以通过添加微信duncansailing获得免费技术指导。【点菜了】");
+                        SMSTools.Send(loginName, "欢迎您注册使用点菜了智能点菜app，登录账户为"+ loginName + "，初始密码123456，管理后台地址：http://nnbetter.com:8029，请详细查看app首页的使用说明，可以通过添加微信duncansailing获得免费技术指导。【点菜了】");
                     }
                 }
             }

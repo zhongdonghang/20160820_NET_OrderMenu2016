@@ -694,6 +694,7 @@
     <Content Include="Areas\MenuSys\Views\OrgSetting\Setting.cshtml" />
     <Content Include="Areas\MenuSys\Views\ModifyPassword\Setting.cshtml" />
     <Content Include="lib\uploadify.zip" />
+    <Content Include="Areas\SystemManage\Views\Organize\SendSMS.cshtml" />
     <None Include="Properties\PublishProfiles\NFine.Framework.Release.pubxml" />
     <Content Include="uploadify\check-exists.php" />
     <Content Include="uploadify\index.php" />
